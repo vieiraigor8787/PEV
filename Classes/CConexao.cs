@@ -11,8 +11,8 @@ namespace PEV.Classes
         {
             string Host = "localhost";
             string Banco = "pev";
-            string Usuario = "root";
-            string Senha = "1234";
+            string Usuario = "";
+            string Senha = "";
             return "Data Source = " + Host + "; Initial Catalog = " + Banco + "; User Id = " + Usuario + "; Password = " + Senha + "; ";
         }
     }
