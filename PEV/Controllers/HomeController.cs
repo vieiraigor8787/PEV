@@ -269,6 +269,11 @@ namespace PEV.Controllers
             RelatorioDB NomeMaisVendido = new RelatorioDB();
             RelatorioDB TamMaisVendido = new RelatorioDB();
             RelatorioDB QuantidadeMaisVendido = new RelatorioDB();
+            RelatorioDB NomeProdutoMaisVendido = new RelatorioDB();
+            RelatorioDB NomeProdutoMaisVendidoQuantidade = new RelatorioDB();
+
+            RelatorioDB GeneroNome = new RelatorioDB();
+            RelatorioDB GeneroQuantidade = new RelatorioDB();
 
             ViewData["VDColaboradores"] = Col.Colaboradores().TotalColaborador;
             ViewData["VDClientes"] = Cli.Clientes().TotalCliente;
@@ -286,6 +291,12 @@ namespace PEV.Controllers
             ViewData["VDNomeMaisVendido"] = NomeMaisVendido.NomeTamMaisVendido().Nome;
             ViewData["VDTamMaisVendido"] = TamMaisVendido.NomeTamMaisVendido().Tamanho;
             ViewData["VDQuantidadeMaisVendido"] = QuantidadeMaisVendido.NomeTamMaisVendido().Quantidade;
+
+            ViewData["VDNomeProdutoMaisVendidoNome"] = NomeProdutoMaisVendido.NomeProdutoMaisVendido().Nome;
+            ViewData["VDNomeProdutoMaisVendidoQuantidade"] = NomeProdutoMaisVendidoQuantidade.NomeProdutoMaisVendido().Quantidade;
+
+            ViewData["VDGeneroNome"] = GeneroNome.GeneroMaisVendido().Descricao;
+            ViewData["VDGeneroQuantidade"] = GeneroQuantidade.GeneroMaisVendido().Quantidade;
 
             ViewData["NomeLogin"] = CMetodos_Autenticacao.GET_DadosUser(_hCont, CMetodos_Autenticacao.eDadosUser.Nome);
             ViewData["Tipo"] = CMetodos_Autenticacao.GET_DadosUser(_hCont, CMetodos_Autenticacao.eDadosUser.Tipo);
