@@ -1,0 +1,132 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    @*<meta content="width=device-width, initial-scale=1.0" name="viewport">*@
+    <meta name="description"
+          content="Responsive sidebar template with sliding effect and dropdown menu based on bootstrap 3">
+    <title>Plataforma digital PEV</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://malihu.github.io/custom-scrollbar/jquery.mCustomScrollbar.concat.min.js"></script>
+
+    <script src="~/js/main.js"></script>
+    <script src="~/js/site.js"></script>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
+          integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"
+          integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://malihu.github.io/custom-scrollbar/jquery.mCustomScrollbar.min.css">
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <link rel="stylesheet" href="~/css/main.css">
+    <link rel="shortcut icon" type="image/png" href="~/img/favicon.png" />
+
+
+    <link href="~/css/bootstrap.min.css" rel="stylesheet" />
+
+    <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href='http://fonts.googleapis.com/css?family=Roboto:400,700,300' rel='stylesheet' type='text/css'>
+    <script src="https://kit.fontawesome.com/0a5694ef39.js" crossorigin="anonymous"></script>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+</head>
+
+<body>
+    <div class="page-wrapper default-theme sidebar-bg bg1 toggled">
+        <nav id="sidebar" class="sidebar-wrapper">
+            <div class="sidebar-content">
+                <!-- sidebar-brand  -->
+                <div class="sidebar-item sidebar-brand" style="color:white" > PLATAFORMA ESCOLHA VIRTUAL
+                    @*<a href="#">
+                        <img class="logo" src="~/img/logoPEV.jpeg" style="width:150px" alt="Escolha Virtual">
+                    </a>*@
+                </div>
+                <div class="sidebar-item sidebar-header d-flex flex-nowrap">
+                    <div class="user-info">
+                        Bem vindo,
+                        @if (ViewData["NomeLogin"] != "")
+                        {
+            <span class="user-role">@ViewData["NomeLogin"] </span><br />}
+                        <span class="user-status">
+                            <i class="fa fa-circle"></i>
+                            <span>Online</span>
+                        </span><br>
+                        <span>
+                            <a class="fa fa-sign-out-alt" asp-area="" asp-controller="Home" asp-action="Logout"> Sair</a>
+                        </span>
+                        <br />
+                        <span>
+                            <a class="fas fa-home" asp-area="" asp-controller="Home" asp-action="Dashboard"> Painel inicial</a>
+                        </span>
+                    </div>
+                </div>
+                <!-- sidebar-menu  -->
+                <div class=" sidebar-item sidebar-menu">
+                    <ul>
+                        <li>
+                            <a asp-area="" asp-controller="Pedido" asp-action="index">
+                                <i class="fa fa-chart-line"></i>
+                                <span class="menu-text">Pedidos</span>
+                            </a>
+                        </li>
+                        <li class="sidebar-dropdown">
+                            <a href="#">
+                                <i class="fa fa-shopping-cart"></i>
+                                <span class="menu-text">Produtos</span>
+                            </a>
+                            <div class="sidebar-submenu">
+                                <ul>
+                                    <li>
+                                        <a class="fa fa-sign-out-alt" asp-area="" asp-controller="Produto" asp-action="Index">Produto</a>
+                                    </li>
+                                    <li>
+                                        <a class="fa fa-sign-out-alt" asp-area="" asp-controller="Genero" asp-action="Index">Gênero</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li>
+                            <a asp-area="" asp-controller="Usuario" asp-action="index">
+                                <i class="fa fa-briefcase"></i>
+                                <span class="menu-text">Colaborador</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a asp-area="" asp-controller="Usuario" asp-action="Cliente">
+                                <i class="fa fa-users"></i>
+                                <span class="menu-text">Cliente</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a asp-area="" asp-controller="Home" asp-action="Index">
+                                <span class="menu-text text-xl-right" style="font-size: 18px">Ir para o site</span>
+                                <i class="fa fa-arrow-circle-right"></i>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <!-- sidebar-menu  -->
+            </div>
+        </nav>
+        <!-- page-content  -->
+        <main class="page-content pt-2">
+            <div id="overlay" class="overlay"></div>
+            <div class="container-fluid p-5">
+                <div class="row">
+                    <div class="form-group col-md-12">
+                        @RenderBody()
+                    </div>
+
+                </div>
+            </div>
+        </main>
+    </div>
+    <!-- page-wrapper -->
+    <!-- usando bibliotecas com link externo -->
+
+    @RenderSection("Scripts", required: false)
+</body>
+</html>

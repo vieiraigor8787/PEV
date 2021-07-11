@@ -1,0 +1,144 @@
+﻿@{ Layout = "_Layout_dashboard";
+    ViewData["Title"] = "Dashboard"; }
+
+<style>
+    /*    .dash-title {
+        background: linear-gradient(#237ebe, #ffffff);
+        padding: 10px 5px;
+        position: absolute;
+        top: -4em;
+        left: -34px;
+        width: 100vw;
+    }*/
+
+    h3 {
+        margin-bottom: 1em
+    }
+
+    .square-data {
+        box-shadow: 2px 3px 8px black;
+        width: 22%;
+    }
+
+        .square-data p {
+            margin-left: 5px;
+        }
+
+            .square-data p:first-child {
+                color: #000;
+                font-size: 18px;
+                margin-top: 5px;
+            }
+
+    .info {
+        background: #c7c7c7;
+    }
+
+        .info p {
+            font-size: 14px !important;
+            margin: 0;
+            margin-left: 5px;
+            padding: 2px 0;
+        }
+
+    .sq-bellow {
+        width: 30%
+    }
+
+    .sq-double {
+        width: 47%;
+        background: #419eaf;
+        color: #fff
+    }
+
+        .sq-double p:first-child {
+            font-size: 22px;
+            text-align: center;
+            margin-top: 15px;
+        }
+</style>
+
+
+<div class="dash-title"><h3>Painel de Controle ECCE</h3></div>
+<hr />
+<h5>Pedido e faturamento</h5>
+<hr />
+<div class="d-flex justify-content-around mb-5 mt-3">
+    <div class="square-data">
+        <p>Pedidos</p>
+        <p style="font-size:40px; color:#0026ff; text-align:center">@ViewData["VDVendas"]</p>
+        <div class="info"><p>Últimos 7 dias</p></div>
+    </div>
+    <div class="square-data">
+        <p>Faturamento</p>
+        <p style="        font-size: 40px;
+        color: #ff6a00;
+        text-align: center">@ViewData["VDValor"]</p>
+        <div class="info"><p>Últimos 7 dias</p></div>
+
+    </div>
+    <div class="square-data">
+        <p>Ticket médio</p>
+        <p style="        font-size: 40px;
+        color: #b200ff;
+        text-align: center">@ViewData["VDMediaVenda"]</p>
+    </div>
+    <div class="square-data">
+        <p>Maior venda realizada</p>
+        <p style="        font-size: 40px;
+        color: #570f5a;
+        text-align: center">@ViewData["VDMaiorVenda"]</p>
+    </div>
+</div>
+<div class="d-flex justify-content-around mb-5 mt-3">
+    <div class="square-data sq-double">
+        <p style="color:#fff">Total de pedidos</p>
+        <p style="        font-size: 40px;
+        color: #fff;
+        padding: 30px 0; text-align: center">@ViewData["VDVendTotal"]</p>
+    </div>
+    <div class="square-data sq-double" style="background:#6a6897">
+
+        <p style="color:#fff">Fatutamento total</p>
+        <p style="font-size: 40px;color: #fff; padding:30px 0;text-align: center">@ViewData["VDVendValorTotal"]</p>
+    </div>
+</div>
+<div class="d-flex justify-content-around mb-5 mt-3">
+    <div class="square-data sq-double" style="background:#6a6897">
+        <p style="color:#fff">Produto mais vendido / Tamanho</p>
+        <p style="font-size: 40px;color: #fff; padding:30px 0;text-align: center">@ViewData["VDNomeMaisVendido"]</p>
+        <p style="font-size: 40px;color: #fff; padding:30px 0;text-align: center">@ViewData["VDTamMaisVendido"]</p>
+        <p style="font-size: 40px;color: #fff; padding:30px 0;text-align: center">@ViewData["VDQuantidadeMaisVendido"]</p>
+    </div>
+    <div class="square-data sq-double" style="background:#6a6897">
+        <p style="color:#fff">Tamanho Mais Vendido</p>
+        <p style="font-size: 40px;color: #fff; padding:30px 0;text-align: center">@ViewData["VDTamMaisVendeuTam"]</p>
+        <p style="font-size: 40px;color: #fff; padding:30px 0;text-align: center">@ViewData["VDTamMaisVendeuQtd"]</p>
+    </div>
+</div>
+
+<hr />
+<h5>Usuários e Produtos</h5>
+<hr />
+<div class="d-flex justify-content-between">
+    <div class="square-data sq-bellow">
+        <p>Produtos cadastrados</p>
+        <p style="        font-size: 40px;
+        color: #0f5a42;
+        text-align: center">@ViewData["VDProdutos"]</p>
+    </div>
+    <div class="square-data sq-bellow">
+        <p>Produtos em estoque</p>
+        <p style="        font-size: 40px;
+        color: #825a01;
+        text-align: center">@ViewData["VDQuantidadeProdutos"]</p>
+    </div>
+    <div class="square-data sq-bellow">
+        <p>Clientes registrados</p>
+        <p style="        font-size: 40px;
+        color: #f94b83;
+        text-align: center">@ViewData["VDClientes"]</p>
+    </div>
+</div>
+
+

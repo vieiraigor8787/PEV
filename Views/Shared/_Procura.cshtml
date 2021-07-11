@@ -1,0 +1,16 @@
+﻿@{
+                @model tb_genero;
+}
+
+<form asp-action="Salvar" asp-controller="Genero">
+    <div class="form-group">
+        <label asp-for="Descricao"></label>
+        <input type="text" class="form-control" asp-for="Descricao">
+        <input type="hidden" asp-for="CodigoGenero">
+    </div>
+
+    @Html.Raw(ViewData["Valida"])
+
+    <button type="submit" class="btn btn-primary">Registrar</button>
+
+</form>
