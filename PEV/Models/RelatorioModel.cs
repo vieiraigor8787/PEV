@@ -47,4 +47,11 @@ namespace PEV.Models
         public string Tamanho { get; set; }
         public int Quantidade { get; set; }
     }
+
+    public class GeneroVendeMais
+    {
+        public int CodigoGenero { get; set; }
+        public string Descricao { get; set; }
+        public int Quantidade { get; set; }
+    }
 }

@@ -447,6 +447,7 @@ namespace PEV.Data
                 };
 
                 var model = new TamanhoVendeu();
+                model.Nome = venda.Nome.ToString();
                 model.Tamanho = venda.Tamanho.ToString();
                 model.Quantidade = Convert.ToInt16(venda.Quantidade);
 
@@ -463,6 +464,95 @@ namespace PEV.Data
             }
         }
 
+
+        //NOME DO PRODUTO QUE MAIS VENDIDO
+        public TamanhoVendeu NomeProdutoMaisVendido()
+        {
+
+            try
+            {
+                string sSQL = "";
+                MySqlCommand cmd = new MySqlCommand();
+                MySqlConnection cn = new MySqlConnection(CConexao.Get_StringConexao());
+                cn.Open();
+
+                sSQL = "SELECT p.Nome, COUNT(i.CodigoProduto) AS Quantidade FROM tb_venda_itens AS i " + 
+                        "INNER JOIN tb_produto AS p ON(p.CodigoProduto = i.CodigoProduto)" +
+                        "GROUP BY p.Nome ORDER BY Quantidade DESC";
+
+                cmd.CommandText = sSQL;
+                cmd.Connection = cn;
+                var DrVenda = cmd.ExecuteReader();
+
+                DrVenda.Read();
+
+                var venda = new TamanhoVendeu()
+                {
+                    Nome = DrVenda["Nome"].ToString(),
+                    Quantidade = Convert.ToInt16(DrVenda["Quantidade"])
+                };
+
+                var model = new TamanhoVendeu();
+                model.Nome = venda.Nome.ToString();
+                model.Quantidade = Convert.ToInt16(venda.Quantidade);
+
+                return model;
+            }
+            catch (Exception e)
+            {
+                string msg = e.Message;
+                var model = new TamanhoVendeu();
+                model.Nome = "Oi!";
+                model.Quantidade = 0;
+                return model;
+            }
+        }
+
+
+        //GENERO MAIS VENDIDO
+        public GeneroVendeMais GeneroMaisVendido()
+        {
+
+            try
+            {
+                string sSQL = "";
+                MySqlCommand cmd = new MySqlCommand();
+                MySqlConnection cn = new MySqlConnection(CConexao.Get_StringConexao());
+                cn.Open();
+
+                sSQL = "        SELECT pg.CodigoGenero, g.Descricao, COUNT(i.CodigoProduto) AS Quantidade FROM tb_venda_itens AS i " +
+                                "INNER JOIN tb_produto_genero AS pg ON(pg.CodigoProduto = i.CodigoProduto) " +
+                                "INNER JOIN tb_produto AS p ON(p.CodigoProduto = i.CodigoProduto) " +
+                                "INNER JOIN tb_genero AS g ON(g.CodigoGenero = pg.CodigoGenero) "+
+                                "GROUP BY pg.CodigoGenero ORDER BY Quantidade DESC; ";
+
+                cmd.CommandText = sSQL;
+                cmd.Connection = cn;
+                var DrVenda = cmd.ExecuteReader();
+
+                DrVenda.Read();
+
+                var venda = new GeneroVendeMais()
+                {
+                    Descricao = DrVenda["Descricao"].ToString(),
+                    Quantidade = Convert.ToInt16(DrVenda["Quantidade"])
+                };
+
+                var model = new GeneroVendeMais();
+                model.Descricao = venda.Descricao.ToString();
+                model.Quantidade = Convert.ToInt16(venda.Quantidade);
+
+                return model;
+            }
+            catch (Exception e)
+            {
+                string msg = e.Message;
+                var model = new GeneroVendeMais();
+                model.Descricao = "Oi!";
+                model.Quantidade = 0;
+                return model;
+            }
+        }
     }
 
 
