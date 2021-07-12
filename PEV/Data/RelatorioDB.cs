@@ -509,7 +509,7 @@ namespace PEV.Data
         }
 
 
-        //GENERO MAIS VENDIDO
+        //Método GENERO MAIS VENDIDO
         public GeneroVendeMais GeneroMaisVendido()
         {
 
