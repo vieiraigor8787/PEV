@@ -2,102 +2,46 @@
 @{
                 @model LoginAcesso;
                 ViewData["Title"] = "Login"; }
-<!--
-<style>
-    .card {
-        margin: 0 auto; /* Added */
-        float: none; /* Added */
-        margin-bottom: 10px; /* Added */
-        margin-top: 30px;
-    }
-</style>
-<div class="text-center">
-    <h6>Entre</h6>
-    <form asp-action="Logar">
-        <div class="card border-success col-md-6">
-            <div class="card-body">
 
-                <div class="form-group col-md-12" style="margin-top:10px;">
-                    <label asp-for="Email" class="control-label"><i class="fas fa-user"></i> Usuario</label>
-                    <input type="email" inputmode="email" asp-for="Email" class="form-control" />
-                </div>
-                <div class="col-md-12" style="margin-top:10px;">
-                    <label asp-for="Senha" class="control-label"><i class="fas fa-lock"></i> Senha</label>
-                    <input type="password" asp-for="Senha" class="form-control" />
-                </div>
-                <hr />
-                <div class="col-md-12 text-center" style="margin-top:15px;">
-                    <button id="btentrar" type="submit" class="btn btn-success" style="width:80%;background:#678912"><i class="fas fa-sign-in-alt"></i> Entrar</button>
-                </div>
-                <div id="loadin"></div>
-                <div class="col-md-12 text-center clsErro" style="margin-top:15px;color:red;">
-                    @ViewData["erro"]
-                </div>
-            </div>
-        </div>
-    </form>
-</div>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="~/css/login.css" />
 
--->
-
-<div class="login-form" style="margin-top:150px">
-    <form asp-action="Logar">
-        <h2 class="text-center">Entrar</h2>
-
-        <div class="form-group">
-            <input type="email" class="form-control" asp-for="Email" placeholder="Email" required="required">
-        </div>
-        <div class="form-group">
-            <input type="password" class="form-control" asp-for="Senha" placeholder="Senha" required="required">
-        </div>
-        <div class="form-group">
-            <button id="btentrar" type="submit" class="btn btn-primary btn-block">Entrar</button>
-        </div>
-        <div id="loadin"></div>
-        <div class="col-md-12 text-center clsErro" style="margin-top:15px;color:red;">
-            @ViewData["erro"]
-        </div>
-    </form>
-</div>
-
-
-<style type="text/css">
-
-    .login-form {
-        width: 340px;
-        margin: auto;
-        font-size: 15px;
-    }
-
-        .login-form form {
-            margin-bottom: 100px;
-            background-color: #FFFFFF;
-            box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
-            padding: 30px;
-        }
-
-        .login-form h2 {
-            margin: 0 0 15px;
-        }
-
-
-    .form-control, .btn {
-        min-height: 38px;
-        border-radius: 2px;
-    }
-
-    .btn {
-        font-size: 15px;
-        font-weight: bold;
-    }
-
-</style>
-
-
-
-
-
-
+	<section class="ftco-section">
+		<div class="container">
+			<div class="row justify-content-center">
+				<div class="col-md-6 col-lg-5">
+					<div class="login-wrap p-4 p-md-5">
+		      	<div class="icon d-flex align-items-center justify-content-center">
+		      		<span class="fa fa-user-o"></span>
+		      	</div>
+		      	<h3 class="text-center mb-4">Ja possui uma conta?</h3>
+						<form action="#" class="login-form">
+		      		<div class="form-group">
+		      			<input type="text" class="form-control rounded-left" placeholder="email" required>
+		      		</div>
+	            <div class="form-group d-flex">
+	              <input type="password" class="form-control rounded-left" placeholder="senha" required>
+	            </div>
+	            <div class="form-group d-md-flex">
+	            	<div class="w-50">
+	            		<label class="checkbox-wrap checkbox-primary text-secondary">Lembrar
+									  <input type="checkbox" checked>
+									  <span class="checkmark"></span>
+									</label>
+								</div>
+								<div class="w-50 text-md-right">
+									<a href="#" class="text-secondary">Esqueci minha senha</a>
+								</div>
+	            </div>
+	            <div class="form-group">
+	            	<button type="submit" class="btn btn-primary rounded submit p-3 px-5">Entrar</button>
+	            </div>
+	          </form>
+	        </div>
+				</div>
+			</div>
+		</div>
+	</section>
 
 
 @section Scripts {

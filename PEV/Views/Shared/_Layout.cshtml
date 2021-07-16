@@ -1,7 +1,6 @@
-﻿
-
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -26,7 +25,10 @@
 
 </head>
 <style>
-    .row{margin:0}
+    .row {
+        margin: 0
+    }
+
     .output {
         display: block;
         width: 100%
@@ -45,16 +47,19 @@
         padding-bottom: 60px !important;
     }
 
-    .section-header, .section-footer {
+    .section-header,
+    .section-footer {
         box-shadow: 0 2px 10px rgba(51, 51, 51, 0.1);
         position: relative;
     }
+
     * {
         margin: 0;
         padding: 0;
     }
 
-    html, body {
+    html,
+    body {
         height: 100%;
     }
 
@@ -64,18 +69,14 @@
         width: 100%;
     }
 
-    footer {
-        position: absolute;
-        bottom: 0;
-        width: 100%;
+    .collapse:not(.show) {
+        display: block !important
     }
-    .collapse:not(.show){
-        display:block!important
-    }
-    .navbar-toggler{
-        display:none
 
+    .navbar-toggler {
+        display: none
     }
+
     .navbar-nav {
         text-align: center
     }
@@ -97,17 +98,17 @@
 
                             @*@{
                                 <form asp-action="Procura" asp-controller="Home">
-                                    <div class="input-group search-main">
-                                        <input type="text" class="form-control" placeholder="Procurar">
-                                        <div class="input-group-append">
-                                            <button class="btn btn-primary searchme" type="submit">
-                                                <i class="fa fa-search"></i>
-                                            </button>
-                                        </div>
-                                    </div>
+                                <div class="input-group search-main">
+                                <input type="text" class="form-control" placeholder="Procurar">
+                                <div class="input-group-append">
+                                <button class="btn btn-primary searchme" type="submit">
+                                <i class="fa fa-search"></i>
+                                </button>
+                                </div>
+                                </div>
                                 </form>
 
-                            }*@
+                                }*@
                         </div> <!-- carrinho link -->
                         <div class="">
                             <div class="widgets-wrap d-flex justify-content-end">
@@ -119,11 +120,13 @@
                                             @{
                                                 if (Convert.ToInt32(ViewData["TotalCarrinho"].ToString()) > 0)
                                                 {
-                                                    <span>Meu carrinho <span class="badge badge-secondary" id="dvTCar">@ViewData["TotalCarrinho"].ToString()</span></span>
+                                                    <span>Meu carrinho <span class="badge badge-secondary"
+                                                        id="dvTCar">@ViewData["TotalCarrinho"].ToString()</span></span>
                                                 }
                                                 else
                                                 {
-                                                    <span>Meu carrinho <span class="badge badge-secondary" id="dvTCar" style="display:none;"></span></span>
+                                                    <span>Meu carrinho <span class="badge badge-secondary" id="dvTCar"
+                                                        style="display:none;"></span></span>
                                                 }
                                             }
 
@@ -134,7 +137,8 @@
 
                                 @if (ViewData["NomeLogin"] == "")
                                 {
-                                    <a class="icontext mr-2" asp-area="" asp-controller="Usuario" asp-action="CadastroCliente">
+                                    <a class="icontext mr-2" asp-area="" asp-controller="Usuario"
+                                    asp-action="CadastroCliente">
                                         <div class="icon"><i class="fa fa-lg fa-sign-in-alt"></i></div>
                                         <div class="text">
                                             <span>Registrar-se</span>
@@ -151,19 +155,26 @@
                                 else
                                 {
                                     <div class="widget-header dropdown">
-                                        <a href="#" class="ml-3 icontext" data-toggle="dropdown" data-offset="20,10" aria-expanded="false">
+                                        <a href="#" class="ml-3 icontext" data-toggle="dropdown" data-offset="20,10"
+                                        aria-expanded="false">
                                             <div class="icon"><i class="fa fa-lg fa-user-circle"></i></div>
                                             <div class="text">
                                                 <span> Suas informações &nbsp;<i class="fa fa-caret-down"></i></span>
                                             </div>
                                         </a>
-                                        <div class="dropdown-menu dropdown-menu-right" x-placement="bottom-end" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(140px, 46px, 0px);">
-                                            <a class="nav-link text-dark" asp-area="" asp-controller="Login" asp-action="Index">Olá, <span class="name-user">@ViewData["NomeLogin"]</span></a>
+                                        <div class="dropdown-menu dropdown-menu-right" x-placement="bottom-end"
+                                        style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(140px, 46px, 0px);">
+                                            <a class="nav-link text-dark" asp-area="" asp-controller="Login"
+                                            asp-action="Index">Olá, <span
+                                                class="name-user">@ViewData["NomeLogin"]</span></a>
                                             <hr class="dropdown-divider">
 
-                                            <a class="dropdown-item" asp-area="" asp-controller="Menu" asp-action="MeusPedidos">Meus pedidos</a>
-                                            <a class="dropdown-item" asp-area="" asp-controller="Menu" asp-action="EditaSSenha">Meus dados</a>
-                                            <a class="dropdown-item icontext" asp-area="" asp-controller="Home" asp-action="Logout">
+                                            <a class="dropdown-item" asp-area="" asp-controller="Menu"
+                                            asp-action="MeusPedidos">Meus pedidos</a>
+                                            <a class="dropdown-item" asp-area="" asp-controller="Menu"
+                                            asp-action="EditaSSenha">Meus dados</a>
+                                            <a class="dropdown-item icontext" asp-area="" asp-controller="Home"
+                                            asp-action="Logout">
                                                 <div class="icon"><i class="fa fa-lg fa-sign-out-alt"></i></div>
                                                 <div class="text">
                                                     <span>Sair</span>
@@ -184,7 +195,8 @@
 
             <nav class="navbar navbar-expand-lg navbar-main border-bottom">
                 <div class="container">
-                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#main_nav7" aria-expanded="false" aria-label="Toggle navigation">
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#main_nav7"
+                        aria-expanded="false" aria-label="Toggle navigation">
                         <span class="navbar-toggler-icon"></span>
                     </button>
                     <div class="collapse navbar-collapse" id="main_nav7">
@@ -193,7 +205,8 @@
                                 <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index">Todos</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Masculino">Masculino</a>
+                                <a class="nav-link" asp-area="" asp-controller="Home"
+                                    asp-action="Masculino">Masculino</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Feminino">Feminino</a>
@@ -204,7 +217,8 @@
                             @if (ViewData["Tipo"].ToString() == "A")
                             {
                                 <li class="nav-item">
-                                    <a class="nav-link" asp-area="" asp-controller="Home" asp-action="DashBoard">Dahsboard</a>
+                                    <a class="nav-link" asp-area="" asp-controller="Home"
+                                    asp-action="DashBoard">Dahsboard</a>
                                 </li>
                             }
 
@@ -220,46 +234,49 @@
             </main>
         </div>
 
-        <footer class="section-footer border-top" style="background-color:#fff;padding-bottom:1px;">
+        <footer class="footer-48201">
             <div class="container">
-                <section class="footer-top" style="padding-top:1em">
-                    <div class="row">
-                        <aside class="col-md-3">
-                            <article class="mr-3">
-                                <img src="~/img/sua_logo_aqui.jpg" style="width:150px" class="logo-footer">
-                                <p class="mt-3"></p>
-                            </article>
-                        </aside>
-                        <aside class="col-sm-4 col-md-3">
-                            <h6 class="title">Sobre nós</h6>
-                            <ul class="list-unstyled">
-                                <li><a asp-area="" asp-controller="Estatico" asp-action="Historia">História</a></li>
-                                <li><a asp-area="" asp-controller="Estatico" asp-action="Termo">Termos e Compromissos</a></li>
-                            </ul>
-                        </aside>
-                        <aside class="col-sm-4 col-md-3">
-                            <h6 class="title">Contato</h6>
-                            <ul class="list-unstyled">
-                                <li> <a href="#">Telefone: (11) 3400-1200</a></li>
-                                <li> <a href="#">Whatsap: (11)99991-0021</a></li>
+                <div class="row">
+                    <div class="col-md-4 pr-md-5">
+                        <img src="~/img/sua_logo_aqui.jpg" style="width:150px" class="logo-footer">
+                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Eligendi quasi perferendis ratione
+                            perspiciatis accusantium.</p>
+                    </div>
+                    <div class="col-md">
+                        <ul class="list-unstyled nav-links">
+                            <li><a href="#">Home</a></li>
+                            <li><a href="#">About Us</a></li>
+                            <li><a href="#">Portfolio</a></li>
+                            <li><a href="#">Services</a></li>
+                            <li><a href="#">Contact</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-md">
+                        <ul class="list-unstyled nav-links">
+                            <li><a href="#">Clients</a></li>
+                            <li><a href="#">Team</a></li>
+                            <li><a href="#">Career</a></li>
+                            <li><a href="#">Testimonials</a></li>
+                            <li><a href="#">Journal</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-md">
+                        <ul class="list-unstyled nav-links">
+                            <li><a href="#">Privacy Policy</a></li>
+                            <li><a href="#">Terms &amp; Conditions</a></li>
+                            <li><a href="#">Partners</a></li>
+                        </ul>
+                    </div>
 
-                            </ul>
-                        </aside>
-                        <aside class="col-sm-4  col-md-3">
-                            <span style="font-size:.8rem; font-weight:700">Horário de atendimento: <br>  segunda à sexta das 8h às 18h</span>
-                        </aside>
-
-                    </div> <!-- row.// -->
-                </section>	<!-- footer-top.// -->
-
-                <section class="footer-copyright border-top">
-                    <p target="_blank" class="float-right text-muted">
-                        <a asp-area="" asp-controller="Estatico" asp-action="Politica">Políticas de Privacidade</a> &nbsp;   &nbsp;
-                    </p>
-                    <p class="text-muted"> Desenvolvido por © EscolhaVirtual  </p>
-
-                </section>
-            </div><!-- //container -->
+                </div>
+                <div class="row ">
+                    <div class="col-12 text-center">
+                        <div class="copyright mt-5 pt-5">
+                            <p><small>Desenvolvido por ©Escolha Virtual</small></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </footer>
 
         @RenderSection("Scripts", required: false)
