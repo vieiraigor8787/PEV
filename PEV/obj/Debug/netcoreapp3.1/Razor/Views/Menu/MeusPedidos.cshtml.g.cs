@@ -27,7 +27,7 @@ using PEV.Models;
 #line hidden
 #nullable disable
     [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"f1ca8377e53430da11fc2b3950e06722fb49681b", @"/Views/Menu/MeusPedidos.cshtml")]
-    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"abe107446159a55c9d1cd9d79bfe4e37f0886e81", @"/Views/_ViewImports.cshtml")]
+    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"6de7af3700166531c5bb78c6fd589b0223871d87", @"/Views/_ViewImports.cshtml")]
     public class Views_Menu_MeusPedidos : global::Microsoft.AspNetCore.Mvc.Razor.RazorPage<List<TodosPedidos>>
     {
         #pragma warning disable 1998

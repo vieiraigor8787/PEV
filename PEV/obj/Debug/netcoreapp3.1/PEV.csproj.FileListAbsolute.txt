@@ -2335,7 +2335,6 @@ C:\Users\danie\Documents\GitHub\PEV\PEV\obj\Debug\netcoreapp3.1\Razor\Views\Esta
 C:\Users\danie\Documents\GitHub\PEV\PEV\obj\Debug\netcoreapp3.1\Razor\Views\Genero\CadastroGenero.cshtml.g.cs
 C:\Users\danie\Documents\GitHub\PEV\PEV\obj\Debug\netcoreapp3.1\Razor\Views\Genero\Index.cshtml.g.cs
 C:\Users\danie\Documents\GitHub\PEV\PEV\obj\Debug\netcoreapp3.1\Razor\Views\Home\Carrinho.cshtml.g.cs
-C:\Users\danie\Documents\GitHub\PEV\PEV\obj\Debug\netcoreapp3.1\Razor\Views\Home\Dashboard.cshtml.g.cs
 C:\Users\danie\Documents\GitHub\PEV\PEV\obj\Debug\netcoreapp3.1\Razor\Views\Home\Feminino.cshtml.g.cs
 C:\Users\danie\Documents\GitHub\PEV\PEV\obj\Debug\netcoreapp3.1\Razor\Views\Home\Finalizar.cshtml.g.cs
 C:\Users\danie\Documents\GitHub\PEV\PEV\obj\Debug\netcoreapp3.1\Razor\Views\Home\Index.cshtml.g.cs
@@ -2380,3 +2379,4 @@ C:\Users\danie\Documents\GitHub\PEV\PEV\obj\Debug\netcoreapp3.1\PEV.RazorTargetA
 C:\Users\danie\Documents\GitHub\PEV\PEV\obj\Debug\netcoreapp3.1\PEV.Views.pdb
 C:\Users\danie\Documents\GitHub\PEV\PEV\obj\Debug\netcoreapp3.1\PEV.csproj.CopyComplete
 C:\Users\danie\Documents\GitHub\PEV\PEV\obj\Debug\netcoreapp3.1\PEV.genruntimeconfig.cache
+C:\Users\danie\Documents\GitHub\PEV\PEV\obj\Debug\netcoreapp3.1\Razor\Views\Dashboard\Index.cshtml.g.cs

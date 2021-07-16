@@ -386,6 +386,7 @@ namespace PEV.Data
                 MySqlConnection cn = new MySqlConnection(CConexao.Get_StringConexao());
                 cn.Open();
 
+
                 sSQL = "SELECT p.Tamanho, COUNT(i.CodigoProduto) AS Quantidade FROM tb_venda_itens AS i " +
                     "INNER JOIN tb_produto AS p ON(p.CodigoProduto = i.CodigoProduto) GROUP BY p.Tamanho ORDER BY Quantidade DESC;";
 
@@ -411,7 +412,7 @@ namespace PEV.Data
             {
                 string msg = e.Message;
                 var model = new TamanhoVendeu();
-                model.Tamanho = "KK";
+                model.Tamanho = "Sem Registros!";
                 model.Quantidade = 0;
                 return model;
             }
@@ -457,8 +458,8 @@ namespace PEV.Data
             {
                 string msg = e.Message;
                 var model = new TamanhoVendeu();
-                model.Nome = "Oi!";
-                model.Tamanho = "KK";
+                model.Nome = "Sem Registros!";
+                model.Tamanho = "";
                 model.Quantidade = 0;
                 return model;
             }
@@ -476,7 +477,7 @@ namespace PEV.Data
                 MySqlConnection cn = new MySqlConnection(CConexao.Get_StringConexao());
                 cn.Open();
 
-                sSQL = "SELECT p.Nome, COUNT(i.CodigoProduto) AS Quantidade FROM tb_venda_itens AS i " + 
+                sSQL = "SELECT p.Nome, COUNT(i.CodigoProduto) AS Quantidade FROM tb_venda_itens AS i " +
                         "INNER JOIN tb_produto AS p ON(p.CodigoProduto = i.CodigoProduto)" +
                         "GROUP BY p.Nome ORDER BY Quantidade DESC";
 
@@ -502,7 +503,7 @@ namespace PEV.Data
             {
                 string msg = e.Message;
                 var model = new TamanhoVendeu();
-                model.Nome = "Oi!";
+                model.Nome = "Sem Registros!";
                 model.Quantidade = 0;
                 return model;
             }
@@ -523,7 +524,7 @@ namespace PEV.Data
                 sSQL = "        SELECT pg.CodigoGenero, g.Descricao, COUNT(i.CodigoProduto) AS Quantidade FROM tb_venda_itens AS i " +
                                 "INNER JOIN tb_produto_genero AS pg ON(pg.CodigoProduto = i.CodigoProduto) " +
                                 "INNER JOIN tb_produto AS p ON(p.CodigoProduto = i.CodigoProduto) " +
-                                "INNER JOIN tb_genero AS g ON(g.CodigoGenero = pg.CodigoGenero) "+
+                                "INNER JOIN tb_genero AS g ON(g.CodigoGenero = pg.CodigoGenero) " +
                                 "GROUP BY pg.CodigoGenero ORDER BY Quantidade DESC; ";
 
                 cmd.CommandText = sSQL;
@@ -548,9 +549,87 @@ namespace PEV.Data
             {
                 string msg = e.Message;
                 var model = new GeneroVendeMais();
-                model.Descricao = "Oi!";
+                model.Descricao = "Sem Registros!";
                 model.Quantidade = 0;
                 return model;
+            }
+        }
+
+
+        //PRODUTOS QUE AINDA NÃO VENDERAM NADA
+        public NomeProduto ProdutoSemVenda()
+        {
+
+            try
+            {
+                string sSQL = "";
+                MySqlCommand cmd = new MySqlCommand();
+                MySqlConnection cn = new MySqlConnection(CConexao.Get_StringConexao());
+                cn.Open();
+
+                sSQL = "SELECT p.CodigoProduto AS Código FROM tb_produto AS p LEFT JOIN tb_venda_itens AS iv " +
+                       "ON(p.CodigoProduto = iv.CodigoProduto) WHERE IFNULL(iv.CodigoVenda, 0) = 0 ";
+
+                cmd.CommandText = sSQL;
+                cmd.Connection = cn;
+                var DrVenda = cmd.ExecuteReader();
+
+                DrVenda.Read();
+
+                var venda = new NomeProduto()
+                {
+                    Nome = DrVenda["Descricao"].ToString(),
+                };
+
+                var model = new NomeProduto();
+                model.Nome = venda.Nome.ToString();
+
+                return model;
+            }
+            catch (Exception e)
+            {
+                string msg = e.Message;
+                var model = new NomeProduto();
+                model.Nome = "Sem Registros!";
+                return model;
+            }
+        }
+
+        public List<ClienteCidade> ClienteCidade()
+        {
+
+            try
+            {
+                string sSQL = "";
+                MySqlCommand cmd = new MySqlCommand();
+                MySqlConnection cn = new MySqlConnection(CConexao.Get_StringConexao());
+                cn.Open();
+
+                sSQL = "SELECT cidade, uf, COUNT(cidade) as Quantidade FROM tb_endereco GROUP BY cidade ORDER BY Quantidade DESC";
+
+                cmd.CommandText = sSQL;
+                cmd.Connection = cn;
+                var Dr = cmd.ExecuteReader();
+
+                var Lista = new List<ClienteCidade>();
+
+                while (Dr.Read())
+                {
+                    var item = new ClienteCidade
+                    {
+                        Cidade = Dr["Cidade"].ToString(),
+                        UF = Dr["UF"].ToString(),
+                        Quantidade = Convert.ToInt32(Dr["Quantidade"]),
+                    };
+                    Lista.Add(item);
+                }
+
+                return Lista;
+            }
+            catch (Exception e)
+            {
+                string msg = e.Message;
+                return null;
             }
         }
     }
