@@ -20,6 +20,11 @@ namespace PEV.Controllers
         {
             _hCont = httpContextAccessor;
         }
+
+        public UsuarioController()
+        {
+        }
+
         [Authorize(Roles = "A")]
         public IActionResult Index()
         {
@@ -156,7 +161,7 @@ namespace PEV.Controllers
             ViewData["Valida"] = "";
             return View("AtualizarSenhaColaborador", model);
         }
-        [Authorize(Roles = "A")]
+        //[Authorize(Roles = "A")]
         public IActionResult EditarSenhaCliente(int CodigoLogin)
         {
             ViewData["NomeLogin"] = CMetodos_Autenticacao.GET_DadosUser(_hCont, CMetodos_Autenticacao.eDadosUser.Nome);

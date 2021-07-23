@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using MySqlX.XDevAPI;
+using PEV.Data;
 
 namespace PEV.Controllers
 {
@@ -24,7 +25,7 @@ namespace PEV.Controllers
 
         public async Task<IActionResult> Index(string redirect)
         {
-            if (redirect !=null)
+            if (redirect != null)
             {
                 HttpContext.Session.SetString("redirect", redirect);
             }
@@ -45,7 +46,7 @@ namespace PEV.Controllers
         [HttpPost]
         public async Task<IActionResult> Logar(LoginAcesso obj, string redirect)
         {
-            var resp = await CMetodos_Autenticacao.LoginValidoAsync(obj.Email, obj.Senha,_hCont);
+            var resp = await CMetodos_Autenticacao.LoginValidoAsync(obj.Email, obj.Senha, _hCont);
 
             ViewData["NomeLogin"] = CMetodos_Autenticacao.GET_DadosUser(_hCont, CMetodos_Autenticacao.eDadosUser.Nome);
             ViewData["Tipo"] = CMetodos_Autenticacao.GET_DadosUser(_hCont, CMetodos_Autenticacao.eDadosUser.Tipo);
@@ -55,7 +56,7 @@ namespace PEV.Controllers
             ViewData["TotalCarrinho"] = (RespCar != null) ? RespCar.Sum(c => c.Quantidade) : 0;
 
 
-            if (resp!="")
+            if (resp != "")
             {
                 var Redirect = HttpContext.Session.GetString("redirect");
                 if (!String.IsNullOrEmpty(Redirect))
@@ -64,7 +65,8 @@ namespace PEV.Controllers
                     return RedirectToAction(Redirect, "Home");
                 }
 
-                if (resp == "A") {
+                if (resp == "A")
+                {
                     return RedirectToAction("Index", "Home");
                 }
                 else if (resp == "C")
@@ -76,7 +78,7 @@ namespace PEV.Controllers
 
             }
             else
-            {             
+            {
                 ViewData["erro"] = "Falha no login!";
                 return View("Index");
             }
@@ -88,6 +90,34 @@ namespace PEV.Controllers
             Car.RemoveAll();
             await _hCont.HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
             return RedirectToAction("index", "Home");
+        }
+
+        public IActionResult RecuperaSenhaProximo(string Email, string CPF)
+        {
+
+            ViewData["NomeLogin"] = CMetodos_Autenticacao.GET_DadosUser(_hCont, CMetodos_Autenticacao.eDadosUser.Nome);
+            ViewData["Tipo"] = CMetodos_Autenticacao.GET_DadosUser(_hCont, CMetodos_Autenticacao.eDadosUser.Tipo);
+
+            var _Carrinho = new CarrinhoController(_hCont);
+            var RespCar = _Carrinho.GetAllDB();
+            ViewData["TotalCarrinho"] = (RespCar != null) ? RespCar.Sum(c => c.Quantidade) : 0;
+
+            LoginDB Recupera = new LoginDB();
+
+            if (Recupera.RedefineSenhaPasso1(Email, CPF))
+            {
+                LoginDB LerCodigoLogin = new LoginDB();
+                var cod = LerCodigoLogin.CodigoLoginRecuperaSenha(Email, CPF).CodigoLogin;
+
+                return RedirectToAction("Index", "Home");
+            }
+            else
+            {
+                ViewData["Valida"] = "<div class='alert alert-danger text-center' role='alert'>Email ou CPF não encontrado!</div>";
+            }
+
+            return View("Index");
+
         }
     }
 }

@@ -62,6 +62,7 @@ namespace PEV.Models
 
     public class ClienteCidade
     {
+        public string Nome { get; set; }
         public string Cidade { get; set; }
         public string UF { get; set; }
         public int Quantidade { get; set; }

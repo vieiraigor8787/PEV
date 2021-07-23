@@ -557,7 +557,7 @@ namespace PEV.Data
 
 
         //PRODUTOS QUE AINDA NÃO VENDERAM NADA
-        public NomeProduto ProdutoSemVenda()
+        public List<ClienteCidade> ProdutoSemVenda()
         {
 
             try
@@ -567,31 +567,32 @@ namespace PEV.Data
                 MySqlConnection cn = new MySqlConnection(CConexao.Get_StringConexao());
                 cn.Open();
 
-                sSQL = "SELECT p.CodigoProduto AS Código FROM tb_produto AS p LEFT JOIN tb_venda_itens AS iv " +
+                sSQL = "SELECT p.Nome AS Nome, IFNULL (iv.CodigoVenda,0) as Codigo_Venda FROM tb_produto AS p LEFT JOIN tb_venda_itens AS iv " +
                        "ON(p.CodigoProduto = iv.CodigoProduto) WHERE IFNULL(iv.CodigoVenda, 0) = 0 ";
 
                 cmd.CommandText = sSQL;
                 cmd.Connection = cn;
-                var DrVenda = cmd.ExecuteReader();
+                var Dr = cmd.ExecuteReader();
 
-                DrVenda.Read();
+                Dr.Read();
 
-                var venda = new NomeProduto()
+                var Lista = new List<ClienteCidade>();
+
+                while (Dr.Read())
                 {
-                    Nome = DrVenda["Descricao"].ToString(),
-                };
+                    var item = new ClienteCidade
+                    {
+                        Nome = Dr["Nome"].ToString(),
+                    };
+                    Lista.Add(item);
+                }
 
-                var model = new NomeProduto();
-                model.Nome = venda.Nome.ToString();
-
-                return model;
+                return Lista;
             }
             catch (Exception e)
             {
                 string msg = e.Message;
-                var model = new NomeProduto();
-                model.Nome = "Sem Registros!";
-                return model;
+                return null;
             }
         }
 

@@ -47,6 +47,7 @@ namespace PEV.Controllers
             RelatorioDB GeneroNome = new RelatorioDB();
             RelatorioDB GeneroQuantidade = new RelatorioDB();
 
+
             ViewData["VDColaboradores"] = Col.Colaboradores().TotalColaborador;
             ViewData["VDClientes"] = Cli.Clientes().TotalCliente;
             ViewData["VDProdutos"] = Prod.Produtos().TotalProduto;
@@ -73,23 +74,13 @@ namespace PEV.Controllers
             ViewData["NomeLogin"] = CMetodos_Autenticacao.GET_DadosUser(_hCont, CMetodos_Autenticacao.eDadosUser.Nome);
             ViewData["Tipo"] = CMetodos_Autenticacao.GET_DadosUser(_hCont, CMetodos_Autenticacao.eDadosUser.Tipo);
 
+            RelatorioDB ProdSemVenda = new RelatorioDB();
 
+            ViewData["PSV"] = ProdSemVenda.ProdutoSemVenda();
 
             RelatorioDB Cidade = new RelatorioDB();
             var MLista = Cidade.ClienteCidade();
             return View(MLista);
         }
-
-        public IActionResult ClienteCidade()
-        {
-            RelatorioDB Cidade = new RelatorioDB();
-            var MLista = Cidade.ClienteCidade();
-
-            ViewData["NomeLogin"] = CMetodos_Autenticacao.GET_DadosUser(_hCont, CMetodos_Autenticacao.eDadosUser.Nome);
-            ViewData["Tipo"] = CMetodos_Autenticacao.GET_DadosUser(_hCont, CMetodos_Autenticacao.eDadosUser.Tipo);
-
-            return View(MLista);
-        }
-
     }
 }

@@ -1,17 +1,10 @@
 ﻿@{ Layout = "_Layout_dashboard";
-    ViewData["Title"] = "Dashboard"; 
-    }
+    ViewData["Title"] = "Dashboard";
     @model List<ClienteCidade>
+    var PSV = (List<ClienteCidade>)(@ViewData["PSV"]);
+}
 
 <style>
-    /*    .dash-title {
-        background: linear-gradient(#237ebe, #ffffff);
-        padding: 10px 5px;
-        position: absolute;
-        top: -4em;
-        left: -34px;
-        width: 100vw;
-    }*/
 
     h3 {
         margin-bottom: 1em
@@ -61,11 +54,11 @@
 </style>
 
 
-<div class="dash-title"><h3>Painel de Controle ECCE</h3></div>
+<div class="dash-title"><h3>Painel de Controle Escolha Virtual</h3></div>
 <hr />
 <h5>Pedido e faturamento</h5>
 <hr />
-<div class="d-flex justify-content-around mb-5 mt-3">
+<div class="d-flex justify-content-around">
     <div class="square-data">
         <p>Pedidos</p>
         <p style="font-size:40px; color:#0026ff; text-align:center">@ViewData["VDVendas"]</p>
@@ -106,6 +99,47 @@
     </div>
 </div>
 <div class="d-flex justify-content-around mb-5 mt-3">
+    <div class="content mt-3">
+        <h5>Cidades dos Clientes</h5>
+        <div class="animated fadeIn">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="card">
+                        <div class="card-body">
+                            <table id="bootstrap-data-table-export" class="table table-striped table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th>Cidade</th>
+                                        <th>UF</th>
+                                        <th>Quantidade</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @if (Model.Count > 0)
+                                    {
+                                        @foreach (var item in Model)
+                                        {
+                                            <tr>
+                                                <td>@item.Cidade</td>
+                                                <td>@item.UF</td>
+                                                <td>@item.Quantidade</td>
+                                            </tr>
+                                        }
+                                    }
+                                    else
+                                    {
+                                        <tr>
+                                            <td>Sem Registros</td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
     <div class="square-data sq-double" style="background:#6a6897">
         <p style="color:#fff">Produto mais vendido / Tamanho</p>
         <p style="font-size: 20px;color: #fff; text-align: center">@ViewData["VDNomeMaisVendido"]</p>
@@ -138,8 +172,44 @@
         <p style="font-size: 20px;color: black; text-align: center">@ViewData["VDTamMaisVendeuQtd"]</p>
     </div>
 </div>
-ViewData["VDProdutoSemVenda"]
 
+<div class="content mt-3">
+    <h5>Produtos sem Venda </h5>
+    <div class="animated fadeIn">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-body">
+                        <table id="bootstrap-data-table-export" class="table table-striped table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>Nome</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @if (PSV.Count > 0)
+                                {
+                                    @foreach (var item in PSV)
+                                    {
+                                        <tr>
+                                            <td>@item.Nome</td>
+                                        </tr>
+                                    }
+                                }
+                                else
+                                {
+                                    <tr>
+                                        <td>Sem Registros</td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 <h5>Usuários e Produtos</h5>
 <hr />
 <div class="d-flex justify-content-between">
@@ -163,47 +233,6 @@ ViewData["VDProdutoSemVenda"]
     </div>
 </div>
 
-<vc:ProdutoSemVenda></vc:ProdutoSemVenda>
 
-<div class="content mt-3">
-    <div class="animated fadeIn">
-        <div class="row">
-            <div class="col-md-6">
-                <div class="card">
-                    <div class="card-body">
-                        <table id="bootstrap-data-table-export" class="table table-striped table-bordered">
-                            <thead>
-                                <tr>
-                                    <th>Cidade</th>
-                                    <th>UF</th>
-                                    <th>Quantidade</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @if (Model.Count > 0)
-                                {
-                                    @foreach (var item in Model)
-                                    {
-                                        <tr>
-                                            <td>@item.Cidade</td>
-                                            <td>@item.UF</td>
-                                            <td>@item.Quantidade</td>
-                                        </tr>
-                                    }
-                                }
-                                else
-                                {
-                                    <tr>
-                                        <td>Sem Registros</td>
-                                    </tr>
-                                }
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
 
 

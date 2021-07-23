@@ -15,8 +15,14 @@ namespace PEV.Models
     }
 
     public class LoginAcesso {
+        [Display(Name = "Email", Prompt = "Digite seu email")]
         public string Email { get; set; }
+
+        [Display(Name = "Senha", Prompt = "Digite sua senha")]
         public string Senha { get; set; }
+
+        [Display(Name = "CPF", Prompt = "Digite seu CPF")]
+        public string CPF { get; set; }
     }
 
     public class tb_login
