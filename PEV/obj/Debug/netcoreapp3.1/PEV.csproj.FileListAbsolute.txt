@@ -2787,7 +2787,6 @@ C:\PEV\PEV\obj\Debug\netcoreapp3.1\PEV.RazorAssemblyInfo.cache
 C:\PEV\PEV\obj\Debug\netcoreapp3.1\PEV.RazorAssemblyInfo.cs
 C:\PEV\PEV\obj\Debug\netcoreapp3.1\staticwebassets\PEV.StaticWebAssets.Manifest.cache
 C:\PEV\PEV\obj\Debug\netcoreapp3.1\staticwebassets\PEV.StaticWebAssets.xml
-C:\PEV\PEV\obj\Debug\netcoreapp3.1\scopedcss\bundle\PEV.styles.css
 C:\PEV\PEV\obj\Debug\netcoreapp3.1\PEV.TagHelpers.input.cache
 C:\PEV\PEV\obj\Debug\netcoreapp3.1\PEV.TagHelpers.output.cache
 C:\PEV\PEV\obj\Debug\netcoreapp3.1\PEV.RazorCoreGenerate.cache
@@ -2846,3 +2845,4 @@ C:\PEV\PEV\obj\Debug\netcoreapp3.1\PEV.pdb
 C:\PEV\PEV\obj\Debug\netcoreapp3.1\PEV.genruntimeconfig.cache
 C:\PEV\PEV\obj\Debug\netcoreapp3.1\PEV.csprojAssemblyReference.cache
 C:\PEV\PEV\obj\Debug\netcoreapp3.1\Razor\Views\Dashboard\_ProdutoSemVenda.cshtml.g.cs
+C:\PEV\PEV\bin\Debug\netcoreapp3.1\Properties\launchSettings.json
