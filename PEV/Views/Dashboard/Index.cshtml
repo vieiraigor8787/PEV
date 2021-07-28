@@ -1,11 +1,11 @@
-﻿@{ Layout = "_Layout_dashboard";
+﻿@{
+    Layout = "_Layout_dashboard";
     ViewData["Title"] = "Dashboard";
     @model List<ClienteCidade>
-    var PSV = (List<ClienteCidade>)(@ViewData["PSV"]);
+var PSV = (List<ClienteCidade>)(@ViewData["PSV"]);
 }
 
 <style>
-
     h3 {
         margin-bottom: 1em
     }
@@ -15,26 +15,26 @@
         width: 22%;
     }
 
-        .square-data p {
-            margin-left: 5px;
-        }
+    .square-data p {
+        margin-left: 5px;
+    }
 
-            .square-data p:first-child {
-                color: #000;
-                font-size: 18px;
-                margin-top: 5px;
-            }
+    .square-data p:first-child {
+        color: #000;
+        font-size: 18px;
+        margin-top: 5px;
+    }
 
     .info {
         background: #c7c7c7;
     }
 
-        .info p {
-            font-size: 14px !important;
-            margin: 0;
-            margin-left: 5px;
-            padding: 2px 0;
-        }
+    .info p {
+        font-size: 14px !important;
+        margin: 0;
+        margin-left: 5px;
+        padding: 2px 0;
+    }
 
     .sq-bellow {
         width: 30%
@@ -42,87 +42,187 @@
 
     .sq-double {
         width: 47%;
-        background: #419eaf;
         color: #fff
     }
 
-        .sq-double p:first-child {
-            font-size: 22px;
-            text-align: center;
-            margin-top: 15px;
-        }
+    .sq-double p:first-child {
+        font-size: 22px;
+        text-align: center;
+        margin-top: 15px;
+    }
+
+    .square-data span {
+        font-size: 40px;
+        display: block;
+        text-align: center;
+    }
+
+    .square-data.sq-double {
+        padding: 1em 0;
+    }
+
+    .square-data .sq-double span {
+        font-size: 40px;
+        display: block;
+        text-align: center;
+    }
+
+    .square-data.sq-bellow span {
+        font-size: 30px;
+        display: block;
+        text-align: center;
+    }
 </style>
 
-
-<div class="dash-title"><h3>Painel de Controle Escolha Virtual</h3></div>
-<hr />
-<h5>Pedido e faturamento</h5>
-<hr />
-<div class="d-flex justify-content-around">
-    <div class="square-data">
-        <p>Pedidos</p>
-        <p style="font-size:40px; color:#0026ff; text-align:center">@ViewData["VDVendas"]</p>
-        <div class="info"><p>Últimos 7 dias</p></div>
+<div class="container">
+    <div class="dash-title">
+        <h3>Painel de Visualização</h3>
     </div>
-    <div class="square-data">
-        <p>Faturamento</p>
-        <p style="        font-size: 40px;
-        color: #ff6a00;
-        text-align: center">@ViewData["VDValor"]</p>
-        <div class="info"><p>Últimos 7 dias</p></div>
-
-    </div>
-    <div class="square-data">
-        <p>Ticket médio</p>
-        <p style="        font-size: 40px;
-        color: #b200ff;
-        text-align: center">@ViewData["VDMediaVenda"]</p>
-    </div>
-    <div class="square-data">
-        <p>Maior venda realizada</p>
-        <p style="        font-size: 40px;
-        color: #570f5a;
-        text-align: center">@ViewData["VDMaiorVenda"]</p>
-    </div>
-</div>
-<div class="d-flex justify-content-around mb-5 mt-3">
-    <div class="square-data sq-double">
-        <p style="color:#fff">Total de pedidos</p>
-        <p style="        font-size: 40px;
-        color: #fff;
-        padding: 30px 0; text-align: center">@ViewData["VDVendTotal"]</p>
-    </div>
-    <div class="square-data sq-double" style="background:#6a6897">
-
-        <p style="color:#fff">Fatutamento total</p>
-        <p style="font-size: 40px;color: #fff; padding:30px 0;text-align: center">@ViewData["VDVendValorTotal"]</p>
-    </div>
-</div>
-<div class="d-flex justify-content-around mb-5 mt-3">
+    <hr />
     <div class="content mt-3">
-        <h5>Cidades dos Clientes</h5>
+        <h5>Pedido e faturamento</h5>
+        <hr />
+        <div class="d-flex justify-content-around">
+            <div class="square-data">
+                <p>Pedidos</p>
+                <span style="color:#0026ff;">@ViewData["VDVendas"]</span>
+                <div class="info">
+                    <p>Últimos 7 dias</p>
+                </div>
+            </div>
+            <div class="square-data">
+                <p>Faturamento</p>
+                <span style="color: #ff6a00;">@ViewData["VDValor"]</span>
+                <div class="info">
+                    <p>Últimos 7 dias</p>
+                </div>
+            </div>
+            <div class="square-data">
+                <p>Ticket médio</p>
+                <span style="color: #b200ff;">@ViewData["VDMediaVenda"]</span>
+            </div>
+            <div class="square-data">
+                <p>Maior venda realizada</p>
+                <span style="color: #570f5a;">@ViewData["VDMaiorVenda"]</span>
+            </div>
+        </div>
+        <div class="d-flex justify-content-around mb-5 mt-3">
+            <div class="square-data sq-double" style="background-color: #90CBFB;">
+                <p style="#110066">Total de pedidos</p>
+                <span style="color: #110066">@ViewData["VDVendTotal"]</span>
+            </div>
+            <div class="square-data sq-double" style="background:#110066">
+                <p style="color:#FFD432">Fatutamento total</p>
+                <span style="color: #FFD432">@ViewData["VDVendValorTotal"]</span>
+            </div>
+        </div>
+    </div>
+            <div class="content mt-3">
+                <h5>Pedidos por Cidades</h5>
+                <hr />
+                <div class="animated fadeIn">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="card">
+                                <div class="card-body">
+                                    <table id="bootstrap-data-table-export" class="table table-striped table-bordered">
+                                        <thead>
+                                            <tr>
+                                                <th>Cidade</th>
+                                                <th>UF</th>
+                                                <th>Quantidade</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @if (Model.Count > 0)
+                                            {
+                                                @foreach (var item in Model)
+                                                {
+                                                    <tr>
+                                                        <td>@item.Cidade</td>
+                                                        <td>@item.UF</td>
+                                                        <td>@item.Quantidade</td>
+                                                    </tr>
+                                                }
+                                            }
+                                            else
+                                            {
+                                                <tr>
+                                                    <td>Sem Registros</td>
+                                                </tr>
+                                            }
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            @* <div class="square-data sq-double" style="background:#6a6897">
+                <p style="color:#fff">Produto mais vendido / Tamanho</p>
+                <p style="font-size: 20px;color: #fff; text-align: center">@ViewData["VDNomeMaisVendido"]</p>
+                <p style="font-size: 20px;color: #fff; text-align: center">@ViewData["VDTamMaisVendido"]</p>
+                <p style="font-size: 20px;color: #fff; text-align: center">@ViewData["VDQuantidadeMaisVendido"]</p>
+                </div> *@
+        <div class="content mt-3">
+            <h5>Informações sobre produto</h5>
+            <hr />
+            <div class="d-flex justify-content-around mb-2 mt-3">
+                <div class="square-data sq-double">
+                    <p>Produtos cadastrados</p>
+                    <span style="color: #0f5a42;">@ViewData["VDProdutos"]</span>
+                </div>
+                <div class="square-data sq-double">
+                    <p>Produtos em estoque</p>
+                    <span style="color: #825a01;">@ViewData["VDQuantidadeProdutos"]</span>
+                </div>
+            </div>
+            <div class="d-flex justify-content-around mt-3">
+                <div class="square-data sq-bellow">
+                    <p>Produto mais vendido</p>
+                    <span style="">@ViewData["VDNomeProdutoMaisVendidoNome"]</span>
+                    <div class="info">
+                        <p style="">Quantidade: @ViewData["VDNomeProdutoMaisVendidoQuantidade"]</p>
+                    </div>
+                </div>
+                <div class="square-data sq-bellow">
+                    <p>Gênero mais vendido</p>
+                    <span style="">@ViewData["VDGeneroNome"]</span>
+                    <div class="info">
+                        <p style="">Quantidade: @ViewData["VDGeneroQuantidade"]</p>
+                    </div>
+                </div>
+                <div class="square-data sq-bellow">
+                    <p style="color: black">Tamanho mais vendido</p>
+                    <span style="">@ViewData["VDTamMaisVendeuTam"]</span>
+                    <div class="info">
+                        <p style="">Quantidade: @ViewData["VDTamMaisVendeuQtd"]</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    <div class="content mt-5">
+        <h5>Lista de produtos com baixa movimentação </h5>
+        <hr />
         <div class="animated fadeIn">
             <div class="row">
                 <div class="col-md-6">
                     <div class="card">
                         <div class="card-body">
-                            <table id="bootstrap-data-table-export" class="table table-striped table-bordered">
+                            <table id="bootstrap-data-table-export-2" class="table table-striped table-bordered">
                                 <thead>
                                     <tr>
-                                        <th>Cidade</th>
-                                        <th>UF</th>
-                                        <th>Quantidade</th>
+                                        <th>Nome</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @if (Model.Count > 0)
+                                    @if (PSV.Count > 0)
                                     {
-                                        @foreach (var item in Model)
+                                        @foreach (var item in PSV)
                                         {
                                             <tr>
-                                                <td>@item.Cidade</td>
-                                                <td>@item.UF</td>
-                                                <td>@item.Quantidade</td>
+                                                <td>@item.Nome</td>
                                             </tr>
                                         }
                                     }
@@ -140,99 +240,25 @@
             </div>
         </div>
     </div>
-    <div class="square-data sq-double" style="background:#6a6897">
-        <p style="color:#fff">Produto mais vendido / Tamanho</p>
-        <p style="font-size: 20px;color: #fff; text-align: center">@ViewData["VDNomeMaisVendido"]</p>
-        <p style="font-size: 20px;color: #fff; text-align: center">@ViewData["VDTamMaisVendido"]</p>
-        <p style="font-size: 20px;color: #fff; text-align: center">@ViewData["VDQuantidadeMaisVendido"]</p>
-    </div>
-</div>
-<div class="d-flex justify-content-between">
-    <div class="square-data sq-bellow">
-        <p>Produto Mais Vendido</p>
-        <p style="        font-size:20px;
-        color: #0f5a42;
-        text-align: center">@ViewData["VDNomeProdutoMaisVendidoNome"]</p>
-        <p style="        font-size: 20px;
-        color: #825a01;
-        text-align: center">@ViewData["VDNomeProdutoMaisVendidoQuantidade"]</p>
-    </div>
-    <div class="square-data sq-bellow">
-        <p>Gênero Mais Vendido</p>
-        <p style="        font-size: 20px;
-        color: #825a01;
-        text-align: center">@ViewData["VDGeneroNome"]</p>
-        <p style="        font-size: 20px;
-        color: #825a01;
-        text-align: center">@ViewData["VDGeneroQuantidade"]</p>
-    </div>
-    <div class="square-data sq-double" style="background:#6a6897">
-        <p style="color: black">Tamanho Mais Vendido</p>
-        <p style="font-size: 20px;color: black; text-align: center">@ViewData["VDTamMaisVendeuTam"]</p>
-        <p style="font-size: 20px;color: black; text-align: center">@ViewData["VDTamMaisVendeuQtd"]</p>
-    </div>
-</div>
+    <h5>Usuários e Produtos</h5>
+    <hr />
+    <div class="d-flex justify-content-between">
 
-<div class="content mt-3">
-    <h5>Produtos sem Venda </h5>
-    <div class="animated fadeIn">
-        <div class="row">
-            <div class="col-md-6">
-                <div class="card">
-                    <div class="card-body">
-                        <table id="bootstrap-data-table-export" class="table table-striped table-bordered">
-                            <thead>
-                                <tr>
-                                    <th>Nome</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @if (PSV.Count > 0)
-                                {
-                                    @foreach (var item in PSV)
-                                    {
-                                        <tr>
-                                            <td>@item.Nome</td>
-                                        </tr>
-                                    }
-                                }
-                                else
-                                {
-                                    <tr>
-                                        <td>Sem Registros</td>
-                                    </tr>
-                                }
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
+        <div class="square-data sq-bellow">
+            <p>Clientes registrados</p>
+            <p style="        font-size: 40px;
+        color: #f94b83;
+        text-align: center">@ViewData["VDClientes"]</p>
         </div>
     </div>
 </div>
-<h5>Usuários e Produtos</h5>
-<hr />
-<div class="d-flex justify-content-between">
-    <div class="square-data sq-bellow">
-        <p>Produtos cadastrados</p>
-        <p style="        font-size: 40px;
-        color: #0f5a42;
-        text-align: center">@ViewData["VDProdutos"]</p>
-    </div>
-    <div class="square-data sq-bellow">
-        <p>Produtos em estoque</p>
-        <p style="        font-size: 40px;
-        color: #825a01;
-        text-align: center">@ViewData["VDQuantidadeProdutos"]</p>
-    </div>
-    <div class="square-data sq-bellow">
-        <p>Clientes registrados</p>
-        <p style="        font-size: 40px;
-        color: #f94b83;
-        text-align: center">@ViewData["VDClientes"]</p>
-    </div>
-</div>
-
-
-
-
+<script src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
+<script>
+    $(document).ready(function() {
+    $('#test').DataTable( {
+        "scrollY":        "200px",
+        "scrollCollapse": true,
+        "paging":         true
+    } );
+} );
+</script>

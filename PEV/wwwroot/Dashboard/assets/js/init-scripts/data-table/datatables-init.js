@@ -21,6 +21,19 @@
 
     });
 
+	$('#bootstrap-data-table-export-2').DataTable({
+		"scrollY":        "200px",
+        "scrollCollapse": true,
+        "paging":         false,
+		buttons: [
+			'copyHtml5',
+			'excelHtml5',
+			'csvHtml5',
+			'pdfHtml5'
+		]
+
+    });
+
 	$('#row-select').DataTable( {
         initComplete: function () {
 				this.api().columns().every( function () {
