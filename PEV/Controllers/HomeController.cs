@@ -67,6 +67,36 @@ namespace PEV.Controllers
             return View(resp);
         }
 
+        public IActionResult CategoriasMenu(string Descricao)
+        {
+
+            ProdutoDB Prod = new ProdutoDB();
+            var resp = Prod.GetProdutoVWListCategoria(Descricao);
+
+            ViewData["NomeLogin"] = CMetodos_Autenticacao.GET_DadosUser(_hCont, CMetodos_Autenticacao.eDadosUser.Nome);
+            ViewData["Tipo"] = CMetodos_Autenticacao.GET_DadosUser(_hCont, CMetodos_Autenticacao.eDadosUser.Tipo);
+
+            var RespCar = _Carrinho.GetAllDB();
+            ViewData["TotalCarrinho"] = (RespCar != null) ? RespCar.Sum(c => c.Quantidade) : 0;
+
+            return View(resp);
+        }
+
+        public IActionResult Busca(tb_produto obj)
+        {
+
+            ProdutoDB Prod = new ProdutoDB();
+            var resp = Prod.GetProdutoVWListBusca(obj.Nome);
+
+            ViewData["NomeLogin"] = CMetodos_Autenticacao.GET_DadosUser(_hCont, CMetodos_Autenticacao.eDadosUser.Nome);
+            ViewData["Tipo"] = CMetodos_Autenticacao.GET_DadosUser(_hCont, CMetodos_Autenticacao.eDadosUser.Tipo);
+
+            var RespCar = _Carrinho.GetAllDB();
+            ViewData["TotalCarrinho"] = (RespCar != null) ? RespCar.Sum(c => c.Quantidade) : 0;
+
+            return View(resp);
+        }
+
         public IActionResult Masculino()
         {
 
@@ -189,7 +219,12 @@ namespace PEV.Controllers
             {
                 var CodigoLogin = CMetodos_Autenticacao.GET_DadosUser(_hCont, CMetodos_Autenticacao.eDadosUser.CodigoLogin);
                 var CodigoPedido = fPed.GetPedidoVenda(Convert.ToInt32(CodigoLogin));
+                var Email = CMetodos_Autenticacao.GET_DadosUser(_hCont, CMetodos_Autenticacao.eDadosUser.Email);
 
+                EnviarEmail Send = new EnviarEmail();
+                string Msg = "Obrigado! Pedido Nº " + CodigoPedido + " confirmado. Aguardando confirmação de pagamento!";
+                string Titulo = "Compra realizada!";
+                Send.Enviar(Email, Msg, Titulo);
 
                 return Json(new { success = true, msg = "Pedido Nº " + CodigoPedido +" Finalizado!",redirect= "/home/PedidoConcluido" });
 

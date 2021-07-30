@@ -18,7 +18,7 @@ namespace PEV.Models
         [Display(Name = "Email", Prompt = "Digite seu email")]
         public string Email { get; set; }
 
-        [Display(Name = "Senha", Prompt = "Digite sua senha")]
+        [Display(Name = "Senha", Prompt = "Digite sua nova senha")]
         public string Senha { get; set; }
 
         [Display(Name = "CPF", Prompt = "Digite seu CPF")]

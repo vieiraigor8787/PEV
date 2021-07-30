@@ -14,6 +14,8 @@ namespace PEV.Models
         public tb_produto tb_produto { get; set; }        
         public string JsonLTFoto { get; set; }
         public string JsonLTGenero { get; set; }
+        public string JsonLTamanho { get; set; }
+        public string JsonLTCategoria { get; set; }
     }
 
     public class ProdutoView

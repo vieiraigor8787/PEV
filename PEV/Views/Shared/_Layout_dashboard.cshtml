@@ -17,7 +17,7 @@
     <link rel="stylesheet" href="~/Dashboard/vendors/jqvmap/dist/jqvmap.min.css">
     <link rel="stylesheet" href="~/Dashboard/vendors/datatables.net-bs4/css/dataTables.bootstrap4.min.css">
     <link rel="stylesheet" href="~/Dashboard/vendors/datatables.net-buttons-bs4/css/buttons.bootstrap4.min.css">
-
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
 
     <link rel="stylesheet" href="~/Dashboard/assets/css/style.css">
 
@@ -45,9 +45,9 @@
                 <ul class="nav navbar-nav">
 
                     <li class="active">
-                        <a asp-area="" asp-controller="Dashboard" asp-action="index"> 
+                        <a asp-area="" asp-controller="Dashboard" asp-action="index">
                             <i class="fa fa-dashboard"></i>
-                            <span class="menu-text">Dashboard</span>     
+                            <span class="menu-text">Dashboard</span>
                         </a>
                     </li>
                     <li>
@@ -58,11 +58,11 @@
                     </li>
 
                     @* <li>
-                        <a asp-area="" asp-controller="Usuario" asp-action="index">
-                            <i class="fa fa-briefcase"></i>
-                            <span class="menu-text">Colaborador</span>
-                        </a>
-                    </li> *@
+                            <a asp-area="" asp-controller="Usuario" asp-action="index">
+                                <i class="fa fa-briefcase"></i>
+                                <span class="menu-text">Colaborador</span>
+                            </a>
+                        </li> *@
                     <li>
                         <a asp-area="" asp-controller="Usuario" asp-action="Cliente">
                             <i class="fa fa-users"></i>
@@ -79,27 +79,27 @@
                     <li class="menu-item-has-children dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-check-square-o"></i>Produtos</a>
                         <ul class="sub-menu children dropdown-menu">
-                            <li><i class="fa fa-bars"></i><a asp-area="" asp-controller="Produto" asp-action="Index">Lista de produtos</a></li>
-                            <li><i class="fa fa-table"></i><a href="">Cadastrar produto</a></li>
+                            <li><i class="fa fa-bars"></i><a asp-controller="Produto" asp-action="Index">Lista de produtos</a></li>
+                            <li><i class="fa fa-table"></i><a asp-controller="Produto" asp-action="CadastroProduto">Cadastrar produto</a></li>
                             <li><i class="fa fa-bars"></i><a href="">Lista de compras</a></li>
                         </ul>
                     </li>
                     <li class="menu-item-has-children dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-check-square-o"></i>Categorias</a>
                         <ul class="sub-menu children dropdown-menu">
-                            <li><i class="fa fa-bars"></i><a href="">Lista de categorias</a></li>
-                            <li><i class="fa fa-table"></i><a href="">Cadastrar categoria</a></li>
-                            <li><i class="fa fa-times"></i><a href="">Remover categoria</a></li>
+                            <li><i class="fa fa-bars"></i><a asp-controller="Categoria" asp-action="Index">Lista de categorias</a></li>
+                            <li><i class="fa fa-table"></i><a asp-controller="Categoria" asp-action="CadastroCategoria">Cadastrar categoria</a></li>
+                            @*<li><i class="fa fa-times"></i><a href="">Remover categoria</a></li>*@
                         </ul>
                     </li>
                     <li class="menu-item-has-children dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-th"></i>Características</a>
                         <ul class="sub-menu children dropdown-menu">
                             <li><i class="menu-icon fa fa-bars"></i><a href="forms-basic.html">Lista de características</a></li>
-                            <li><i class="menu-icon fa fa-table"></i><a asp-area="" asp-controller="Genero" asp-action="Index">Cadastrar característica</a></li>
-                            <li><i class="menu-icon fa fa-table"></i><a asp-area="" asp-controller="" asp-action="">Cadastrar gênero</a></li>
-                            <li><i class="menu-icon fa fa-table"></i><a asp-area="" asp-controller="" asp-action="">Cadastrar tamanho</a></li>
-                            <li><i class="menu-icon fa fa-table"></i><a asp-area="" asp-controller="" asp-action="">Cadastrar estoque</a></li>
+                            <li><i class="menu-icon fa fa-table"></i><a asp-controller="Genero" asp-action="Index">Cadastrar característica</a></li>
+                            <li><i class="menu-icon fa fa-table"></i><a asp-controller="" asp-action="">Cadastrar gênero</a></li>
+                            <li><i class="menu-icon fa fa-table"></i><a asp-controller="" asp-action="">Cadastrar tamanho</a></li>
+                            <li><i class="menu-icon fa fa-table"></i><a asp-controller="" asp-action="">Cadastrar estoque</a></li>
                         </ul>
                     </li>
                 </ul>
@@ -198,7 +198,7 @@
                 <div class="col-sm-5">
                     <div class="user-area dropdown float-right">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                             <i class="fa fa-user-circle" style="font-size: 30px;"></i>
+                            <i class="fa fa-user-circle" style="font-size: 30px;"></i>
                         </a>
 
                         <div class="user-menu dropdown-menu">
@@ -221,13 +221,13 @@
         <div class="content mt-3">
 
             @*<div class="col-sm-12">
-                <div class="alert  alert-success alert-dismissible fade show" role="alert">
-                    <span class="badge badge-pill badge-success">Success</span> You successfully read this important alert message.
-                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-            </div>*@
+                    <div class="alert  alert-success alert-dismissible fade show" role="alert">
+                        <span class="badge badge-pill badge-success">Success</span> You successfully read this important alert message.
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                </div>*@
             <div class="container">
                 <main role="main" class="pb-3">
                     @RenderBody()
@@ -260,7 +260,7 @@
     <script src="~/Dashboard/vendors/datatables.net-buttons/js/buttons.print.min.js"></script>
     <script src="~/Dashboard/vendors/datatables.net-buttons/js/buttons.colVis.min.js"></script>
     <script src="~/Dashboard/assets/js/init-scripts/data-table/datatables-init.js"></script>
-    
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
 
     @RenderSection("Scripts", required: false)
 </body>
