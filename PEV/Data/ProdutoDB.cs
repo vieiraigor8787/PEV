@@ -32,10 +32,11 @@ namespace PEV.Data
                 
                 obj.JsonLTFoto = obj.JsonLTFoto.Replace("Descricao", "Caminho");
                 obj.JsonLTGenero = obj.JsonLTGenero.Replace("Codigo", "CodigoGenero");
+                obj.JsonLTCategoria = obj.JsonLTCategoria.Replace("Codigo", "CodigoCategoria");
 
                 var prodFotos = JsonConvert.DeserializeObject<List<tb_produto_foto>>(obj.JsonLTFoto, settings);
                 var proGeneros = JsonConvert.DeserializeObject<List<tb_produto_genero>>(obj.JsonLTGenero, settings);
-
+                var proCategoria = JsonConvert.DeserializeObject<List<tb_produto_categoria>>(obj.JsonLTCategoria, settings);
 
                 sSQL = "insert into tb_produto (CodigoInterno, Nome, Descricao, valor, dataregistro, peso, quantidade, ativo, tamanho)values(@codigointerno, @nome, @descricao, @valor, Now(), @peso, @quantidade, @ativo, @tamanho)";
                 cmd.Parameters.AddWithValue("@codigointerno", obj.tb_produto.CodigoInterno);
@@ -97,6 +98,22 @@ namespace PEV.Data
                         cmd.CommandText = sSQL;
                         cmd.ExecuteNonQuery();
                     }
+
+                    //Categorias                   
+                    foreach (var item in proCategoria)
+                    {
+                        Tabela = "tb_produto_categoria";
+                        Coluna = "CodigoCategoria";
+                        Codigo = item.CodigoCategoria;
+
+                        cmd.Parameters.Clear();
+                        cmd.Connection = cn;
+                        sSQL = "insert into  " + Tabela + " (" + Coluna + ",CodigoProduto)values(@Codigo,@CodigoProduto)";
+                        cmd.Parameters.AddWithValue("@CodigoProduto", CodigoProduto);
+                        cmd.Parameters.AddWithValue("@Codigo", Codigo);
+                        cmd.CommandText = sSQL;
+                        cmd.ExecuteNonQuery();
+                    }
                 }
                 return true;
             }
@@ -125,9 +142,11 @@ namespace PEV.Data
 
                 obj.JsonLTFoto = obj.JsonLTFoto.Replace("Descricao", "Caminho");
                 obj.JsonLTGenero = obj.JsonLTGenero.Replace("Codigo", "CodigoGenero");
+                obj.JsonLTCategoria = obj.JsonLTCategoria.Replace("Codigo", "CodigoCategoria");
 
                 var prodFotos = JsonConvert.DeserializeObject<List<tb_produto_foto>>(obj.JsonLTFoto, settings);
                 var proGeneros = JsonConvert.DeserializeObject<List<tb_produto_genero>>(obj.JsonLTGenero, settings);
+                var proCategoria = JsonConvert.DeserializeObject<List<tb_produto_categoria>>(obj.JsonLTCategoria, settings);
 
                 sSQL = " update tb_produto set CodigoInterno=@codigointerno, Nome=@nome, Descricao=@descricao, valor=@valor, peso=@peso, quantidade=@quantidade, ativo=@ativo," +
                        " tamanho=@tamanho where CodigoProduto=" + obj.tb_produto.CodigoProduto;
@@ -184,6 +203,22 @@ namespace PEV.Data
                         cmd.CommandText = sSQL;
                         cmd.ExecuteNonQuery();
                     }
+
+                    //Categorias                   
+                    foreach (var item in proCategoria)
+                    {
+                        Tabela = "tb_produto_categoria";
+                        Coluna = "CodigoCategoria";
+                        Codigo = item.CodigoCategoria;
+
+                        cmd.Parameters.Clear();
+                        cmd.Connection = cn;
+                        sSQL = "insert into  " + Tabela + " (" + Coluna + ",CodigoProduto)values(@Codigo,@CodigoProduto)";
+                        cmd.Parameters.AddWithValue("@CodigoProduto", obj.tb_produto.CodigoProduto);
+                        cmd.Parameters.AddWithValue("@Codigo", Codigo);
+                        cmd.CommandText = sSQL;
+                        cmd.ExecuteNonQuery();
+                    }
                     return true;
                 }
                 return false;
@@ -216,6 +251,41 @@ namespace PEV.Data
                     var item = new SelectListItem
                     {
                         Value = Dr["CodigoGenero"].ToString(),
+                        Text = Dr["Descricao"].ToString(),
+                    };
+
+                    LT.Add(item);
+                }
+                return LT;
+            }
+            catch (Exception e)
+            {
+                string msg = e.Message;
+                return null;
+            }
+        }
+
+        public List<SelectListItem> GetCategoria()
+        {
+            try
+            {
+                string sSQL = "";
+                MySqlCommand cmd = new MySqlCommand();
+                MySqlConnection cn = new MySqlConnection(CConexao.Get_StringConexao());
+                cn.Open();
+
+                sSQL = "select * from tb_categoria";
+                cmd.CommandText = sSQL;
+                cmd.Connection = cn;
+                var Dr = cmd.ExecuteReader();
+
+                List<SelectListItem> LT = new List<SelectListItem>();
+
+                while (Dr.Read())
+                {
+                    var item = new SelectListItem
+                    {
+                        Value = Dr["CodigoCategoria"].ToString(),
                         Text = Dr["Descricao"].ToString(),
                     };
 
@@ -530,6 +600,111 @@ namespace PEV.Data
             }
         }
 
+        public List<ProdutoVWList> GetProdutoVWListBusca(string Nome)
+        {
+            try
+            {
+                string sSQL = "";
+                MySqlCommand cmd = new MySqlCommand();
+                MySqlConnection cn = new MySqlConnection(CConexao.Get_StringConexao());
+                cn.Open();
+
+                sSQL = "select *," +
+                    "(select Caminho from tb_produto_foto where tb_produto_foto.CodigoProduto=tb_produto.CodigoProduto limit 1) as Foto" +
+                    " from tb_produto WHERE Nome LIKE'%" + Nome + "%' GROUP BY tb_produto.CodigoInterno";
+
+                cmd.CommandText = sSQL;
+                cmd.Connection = cn;
+                var Dr = cmd.ExecuteReader();
+
+                var LT = new List<ProdutoVWList>();
+
+                while (Dr.Read())
+                {
+                    var item = new ProdutoVWList();
+
+                    item.tb_produto = new tb_produto
+                    {
+                        CodigoProduto = Convert.ToInt32(Dr["CodigoProduto"]),
+                        CodigoInterno = Dr["CodigoInterno"].ToString(),
+                        Nome = Dr["Nome"].ToString(),
+                        Descricao = Dr["Descricao"].ToString(),
+                        Valor = Convert.ToDecimal(Dr["Valor"]),
+                        DataRegistro = Convert.ToDateTime(Dr["DataRegistro"]).AddHours(-3),
+                        Peso = Convert.ToDouble(Dr["Peso"]),
+                        Ativo = Dr["Ativo"].ToString(),
+                    };
+
+                    item.Foto = Dr["Foto"].ToString();
+
+                    LT.Add(item);
+                }
+
+                return LT;
+            }
+            catch (Exception e)
+            {
+                string msg = e.Message;
+                return null;
+            }
+        }
+
+
+        public List<ProdutoVWList> GetProdutoVWListCategoria(string Descricao)
+        {
+            try
+            {
+                string sSQL = "";
+                MySqlCommand cmd = new MySqlCommand();
+                MySqlConnection cn = new MySqlConnection(CConexao.Get_StringConexao());
+                cn.Open();
+
+                sSQL = "SELECT p.CodigoProduto, ct.Descricao, p.CodigoInterno, p.Nome, p.Descricao, p.Valor, p.DataRegistro, p.Peso, p.Ativo, f.Caminho from tb_produto AS p " +
+                        "LEFT JOIN tb_produto_foto AS f ON f.CodigoProduto = p.CodigoProduto " +
+                        "INNER JOIN tb_produto_categoria AS c ON (p.CodigoProduto = c.CodigoProduto) " +
+                        "INNER JOIN tb_categoria AS ct ON (c.CodigoCategoria = ct.CodigoCategoria)" +
+                        "WHERE ct.Descricao='" + Descricao + "' " +
+                        "GROUP BY p.CodigoInterno";
+
+
+                cmd.CommandText = sSQL;
+                cmd.Connection = cn;
+                var Dr = cmd.ExecuteReader();
+
+                var LT = new List<ProdutoVWList>();
+
+                while (Dr.Read())
+                {
+                    var item = new ProdutoVWList();
+
+                    item.tb_produto = new tb_produto
+                    {
+                        CodigoProduto = Convert.ToInt32(Dr["CodigoProduto"]),
+                        CodigoInterno = Dr["CodigoInterno"].ToString(),
+                        Nome = Dr["Nome"].ToString(),
+                        Descricao = Dr["Descricao"].ToString(),
+                        Valor = Convert.ToDecimal(Dr["Valor"]),
+                        DataRegistro = Convert.ToDateTime(Dr["DataRegistro"]).AddHours(-3),
+                        Peso = Convert.ToDouble(Dr["Peso"]),
+                        Ativo = Dr["Ativo"].ToString(),
+                    };
+
+                    item.Foto = Dr["Caminho"].ToString();
+
+                    LT.Add(item);
+                }
+
+                return LT;
+            }
+            catch (Exception e)
+            {
+                string msg = e.Message;
+                return null;
+            }
+        }
+
+
+
         public List<ProdutoVWList> GetProdutoVWListInfantil()
         {
             try
@@ -722,6 +897,7 @@ namespace PEV.Data
                 return null;
             }
         }
+
 
         public List<SelectListItem> GetTamanhoProduto(int CodigoProduto)
         {

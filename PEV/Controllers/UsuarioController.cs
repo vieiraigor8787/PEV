@@ -21,10 +21,6 @@ namespace PEV.Controllers
             _hCont = httpContextAccessor;
         }
 
-        public UsuarioController()
-        {
-        }
-
         [Authorize(Roles = "A")]
         public IActionResult Index()
         {
@@ -36,17 +32,7 @@ namespace PEV.Controllers
 
             return View(MLista);
         }
-        [Authorize(Roles = "A")]
-        public IActionResult Colaborador()
-        {
-            UsuarioDB Usuario = new UsuarioDB();
-            var MLista = Usuario.GetAllFuncionario();
 
-            ViewData["NomeLogin"] = CMetodos_Autenticacao.GET_DadosUser(_hCont, CMetodos_Autenticacao.eDadosUser.Nome);
-            ViewData["Tipo"] = CMetodos_Autenticacao.GET_DadosUser(_hCont, CMetodos_Autenticacao.eDadosUser.Tipo);
-
-            return View(MLista);
-        }
         [Authorize(Roles = "A")]
         public IActionResult Cliente()
         {
@@ -58,7 +44,6 @@ namespace PEV.Controllers
 
             return View(MLista);
         }
-
 
         public IActionResult CadastroCliente()
         {
@@ -225,6 +210,10 @@ namespace PEV.Controllers
 
                 if (Usu.InserirDados(obj))
                 {
+                    EnviarEmail Send = new EnviarEmail();
+                    string Msg = "Parabéns! Seu cadastro foi realizado com sucesso!";
+                    string Titulo = "Cadastro Realizado!";
+                    Send.Enviar(obj.tb_login.Email, Msg, Titulo);
                     ViewData["Valida"] = "<div class='alert alert-success text-center' role='alert'>Cadastro efetuado com sucesso! Faça seu login! ";
                     return View("CadastroCliente");
 
@@ -239,6 +228,10 @@ namespace PEV.Controllers
             {
                 if (Usu.UpDateDadosUsuario(obj))
                 {
+                    EnviarEmail Send = new EnviarEmail();
+                    string Msg = "Parabéns! Seu cadastro foi Atualizado com sucesso!";
+                    string Titulo = "Cadastro Atualizado!";
+                    Send.Enviar(obj.tb_login.Email, Msg, Titulo);
                     ViewData["Valida"] = "<div class='alert alert-success text-center' role='alert'>Registro atualizado com sucesso!</div>";
                 }
                 else

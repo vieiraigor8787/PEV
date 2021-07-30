@@ -11,7 +11,7 @@ namespace PEV.Data
     public class LoginDB
     {
 
-        public bool RedefineSenhaPasso1(string Email, string CPF)
+        public bool RedefineSenha(string Email, string CPF, string Senha)
         {
             {
                 try
@@ -22,11 +22,21 @@ namespace PEV.Data
                     cn.Open();
 
                     sSQL = "SELECT * FROM tb_login WHERE Email='" + Email + "' AND CPF_CNPJ='" + CPF + "'";
-
                     cmd.CommandText = sSQL;
                     cmd.Connection = cn;
                     var Dr = cmd.ExecuteReader();
-                    return Dr.HasRows;
+
+                    if (Dr.HasRows)
+                    {
+                        Dr.Close();
+                        sSQL = "UPDATE tb_login SET Senha=MD5('" + Senha +"') WHERE Email='" + Email + "' AND CPF_CNPJ='" + CPF + "'";
+                        cmd.Parameters.Clear();
+                        cmd.Connection = cn;
+                        cmd.CommandText = sSQL;
+                        cmd.ExecuteNonQuery();
+                        return true;
+                    }
+                    return false;
                 }
                 catch (Exception e)
                 {
@@ -38,7 +48,7 @@ namespace PEV.Data
 
 
         //Retorna o CodigoLogin do usuário que quer recuperar a senha
-        public tb_login CodigoLoginRecuperaSenha(string Email, string CPF)
+        public tb_login CodigoLoginRecuperaSenha(string Email, string CPF, string Senha)
         {
 
             try

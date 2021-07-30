@@ -92,7 +92,7 @@ namespace PEV.Controllers
             return RedirectToAction("index", "Home");
         }
 
-        public IActionResult RecuperaSenhaProximo(string Email, string CPF)
+        public IActionResult RecuperaSenhaProximo(string Email, string CPF, string Senha)
         {
 
             ViewData["NomeLogin"] = CMetodos_Autenticacao.GET_DadosUser(_hCont, CMetodos_Autenticacao.eDadosUser.Nome);
@@ -104,12 +104,14 @@ namespace PEV.Controllers
 
             LoginDB Recupera = new LoginDB();
 
-            if (Recupera.RedefineSenhaPasso1(Email, CPF))
+            if (Recupera.RedefineSenha(Email, CPF, Senha))
             {
                 LoginDB LerCodigoLogin = new LoginDB();
-                var cod = LerCodigoLogin.CodigoLoginRecuperaSenha(Email, CPF).CodigoLogin;
-
-                return RedirectToAction("Index", "Home");
+                EnviarEmail Send = new EnviarEmail();
+                string Msg = "Sua senha foi atualizada com sucesso!";
+                string Titulo = "Recuperação de Senha!";
+                Send.Enviar(Email, Msg, Titulo);
+                ViewData["Valida"] = "<div class='alert alert-success text-center' role='alert'>Senha Atualizada com sucesso! Faça seu Login e Boas compras!</div>";
             }
             else
             {

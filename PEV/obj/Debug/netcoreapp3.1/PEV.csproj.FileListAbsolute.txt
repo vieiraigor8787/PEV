@@ -2830,7 +2830,6 @@ C:\PEV\PEV\obj\Debug\netcoreapp3.1\Razor\Views\Usuario\AtualizaCadastroColaborad
 C:\PEV\PEV\obj\Debug\netcoreapp3.1\Razor\Views\Usuario\AtualizarSenhaCliente.cshtml.g.cs
 C:\PEV\PEV\obj\Debug\netcoreapp3.1\Razor\Views\Usuario\AtualizarSenhaColaborador.cshtml.g.cs
 C:\PEV\PEV\obj\Debug\netcoreapp3.1\Razor\Views\Usuario\CadastroCliente.cshtml.g.cs
-C:\PEV\PEV\obj\Debug\netcoreapp3.1\Razor\Views\Usuario\Cliente.cshtml.g.cs
 C:\PEV\PEV\obj\Debug\netcoreapp3.1\Razor\Views\Usuario\Index.cshtml.g.cs
 C:\PEV\PEV\obj\Debug\netcoreapp3.1\Razor\Views\Usuario\MeusDados.cshtml.g.cs
 C:\PEV\PEV\obj\Debug\netcoreapp3.1\Razor\Views\Usuario\_ValidationScriptsPartial.cshtml.g.cs
@@ -2843,6 +2842,13 @@ C:\PEV\PEV\obj\Debug\netcoreapp3.1\PEV.csproj.CopyComplete
 C:\PEV\PEV\obj\Debug\netcoreapp3.1\PEV.dll
 C:\PEV\PEV\obj\Debug\netcoreapp3.1\PEV.pdb
 C:\PEV\PEV\obj\Debug\netcoreapp3.1\PEV.genruntimeconfig.cache
-C:\PEV\PEV\obj\Debug\netcoreapp3.1\PEV.csprojAssemblyReference.cache
 C:\PEV\PEV\obj\Debug\netcoreapp3.1\Razor\Views\Dashboard\_ProdutoSemVenda.cshtml.g.cs
-C:\PEV\PEV\bin\Debug\netcoreapp3.1\Properties\launchSettings.json
+C:\PEV\PEV\obj\Debug\netcoreapp3.1\PEV.csproj.AssemblyReference.cache
+C:\PEV\PEV\obj\Debug\netcoreapp3.1\scopedcss\bundle\PEV.styles.css
+C:\PEV\PEV\obj\Debug\netcoreapp3.1\Razor\Views\Usuario\Cliente.cshtml.g.cs
+C:\PEV\PEV\obj\Debug\netcoreapp3.1\Razor\Views\Categoria\CadastroCategoria.cshtml.g.cs
+C:\PEV\PEV\obj\Debug\netcoreapp3.1\Razor\Views\Categoria\Index.cshtml.g.cs
+C:\PEV\PEV\obj\Debug\netcoreapp3.1\Razor\Views\Shared\Components\Categorias\Default.cshtml.g.cs
+C:\PEV\PEV\obj\Debug\netcoreapp3.1\Razor\Views\Home\CategoriasMenu.cshtml.g.cs
+C:\PEV\PEV\obj\Debug\netcoreapp3.1\Razor\Views\Shared\Components\Busca\Default.cshtml.g.cs
+C:\PEV\PEV\obj\Debug\netcoreapp3.1\Razor\Views\Home\Busca.cshtml.g.cs

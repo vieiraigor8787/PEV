@@ -79,11 +79,13 @@ namespace PEV.Controllers
         {
             ProdutoDB Gen = new ProdutoDB();
             ProdutoDB Tam = new ProdutoDB();
+            ProdutoDB Cat = new ProdutoDB();
 
             ViewData["NomeLogin"] = CMetodos_Autenticacao.GET_DadosUser(_hCont, CMetodos_Autenticacao.eDadosUser.Nome);
             ViewData["Tipo"] = CMetodos_Autenticacao.GET_DadosUser(_hCont, CMetodos_Autenticacao.eDadosUser.Tipo);
             ViewData["LTGenero"] = Gen.GetGenero();
             ViewData["LTTam"] = Tam.GetTamanho();
+            ViewData["LTCat"] = Cat.GetCategoria();
 
             ViewData["Valida"] = "";
             return View();
@@ -94,9 +96,11 @@ namespace PEV.Controllers
         {
             ProdutoDB Gen = new ProdutoDB();
             ProdutoDB Tam = new ProdutoDB();
+            ProdutoDB Cat = new ProdutoDB();
 
             ViewData["LTGenero"] = Gen.GetGenero();
             ViewData["LTTam"] = Tam.GetTamanho();
+            ViewData["LTCat"] = Cat.GetCategoria();
 
             ProdutoDB Prod = new ProdutoDB();
 
@@ -119,11 +123,11 @@ namespace PEV.Controllers
 
             if (obj.tb_produto.CodigoProduto == 0)
             {
-                if (Prod.ValidarTamanho(obj))
-                {
-                    return Json(new { success = false, msg = "Erro ao Cadastrar!" });
-                }
-                else if (Prod.InserirDados(obj))
+                //if (Prod.ValidarTamanho(obj))
+                //{
+                //    return Json(new { success = false, msg = "Erro ao Cadastrar!" });
+                //}
+                if (Prod.InserirDados(obj))
                 {
                     return Json(new { success = true, msg = "Produto Cadastrado com Sucesso!" });
                 }
