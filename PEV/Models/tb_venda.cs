@@ -9,6 +9,7 @@ namespace PEV.Models
     {
         public int CodigoVenda { get; set; }
         public int CodigoLogin { get; set; }
+        public string Email { get; set; }
         public int CodigoEndereco { get; set; }
         public double ValorFinal { get; set; }
         public DateTime DataRegistro { get; set; }

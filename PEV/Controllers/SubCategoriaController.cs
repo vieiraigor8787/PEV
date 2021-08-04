@@ -6,38 +6,33 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using PEV.Classes;
 using Microsoft.AspNetCore.Http;
+using PEV.Classes;
 
 namespace PEV.Controllers
 {
-    public class CategoriaController : Controller
+    public class SubCategoriaController : Controller
     {
+
         private readonly IHttpContextAccessor _hCont;
 
-        public CategoriaController(IHttpContextAccessor httpContextAccessor)
+        public SubCategoriaController(IHttpContextAccessor httpContextAccessor)
         {
             _hCont = httpContextAccessor;
         }
 
         public IActionResult Index()
         {
-            CategoriaDB Cat = new CategoriaDB();
-            var MLista = Cat.GetAllCategoria();
+            SubCategoriaDB Cat = new SubCategoriaDB();
+            var MLista = Cat.GetAllSubCategoria();
             return View(MLista);
         }
-        public IActionResult CadastroCategoria()
+
+        public IActionResult SubcategoriasMenu(int CodigoSubCategoria)
         {
 
-            ViewData["Valida"] = "";
-            return View();
-        }
-
-        public IActionResult CategoriasMenu(string Descricao)
-        {
-
-            ProdutoDB Prod = new ProdutoDB();
-            var resp = Prod.GetProdutoVWListCategoria(Descricao);
+            SubCategoriaDB Prod = new SubCategoriaDB();
+            var resp = Prod.GetProdutoVWListSubcategoria(CodigoSubCategoria);
 
             ViewData["NomeLogin"] = CMetodos_Autenticacao.GET_DadosUser(_hCont, CMetodos_Autenticacao.eDadosUser.Nome);
             ViewData["Tipo"] = CMetodos_Autenticacao.GET_DadosUser(_hCont, CMetodos_Autenticacao.eDadosUser.Tipo);
@@ -49,38 +44,48 @@ namespace PEV.Controllers
             return View(resp);
         }
 
-        public IActionResult Desativar(int codigocategoria)
+        public IActionResult CadastroSubCategoria()
         {
-            CategoriaDB Cat = new CategoriaDB();
-            Cat.ExcluirDados(codigocategoria);
-            return RedirectToAction("index", "categoria");
+
+            ViewData["Valida"] = "";
+            ProdutoDB Cat = new ProdutoDB();
+            ViewData["LTCat"] = Cat.GetCategoria();
+
+            return View();
         }
 
-        public IActionResult Editar(int CodigoCategoria, string Descricao)
+        public IActionResult Desativar(int codigocategoria)
         {
-            var model = new tb_categoria();
-            model.CodigoCategoria = CodigoCategoria;
-            model.Descricao = Descricao;
-            ViewData["Valida"] = "";
-            return View("CadastroCategoria", model);
+            SubCategoriaDB Cat = new SubCategoriaDB();
+            Cat.ExcluirDados(codigocategoria);
+            return RedirectToAction("index", "subcategoria");
         }
-        public IActionResult Salvar(tb_categoria obj)
+
+        public IActionResult Editar(int CodigoSubCategoria, string Descricao)
+        {
+            var model = new tb_subcategoria();
+            model.CodigoSubCategoria = CodigoSubCategoria;
+            model.Nome = Descricao;
+            ViewData["Valida"] = "";
+            return View("CadastroSubCategoria", model);
+        }
+        public IActionResult Salvar(tb_subcategoria obj)
         {
             string smgvalida = Validar(obj);
             if (smgvalida != "")
             {
                 ViewData["Valida"] = smgvalida;
-                return View("Cadastrocategoria");
+                return View("CadastroSubcategoria");
             }
 
-            CategoriaDB Cat = new CategoriaDB();
+            SubCategoriaDB Cat = new SubCategoriaDB();
 
-            if (obj.CodigoCategoria == 0)
+            if (obj.CodigoSubCategoria == 0)
             {
 
                 if (Cat.InserirDados(obj))
                 {
-                    ViewData["Valida"] = "<div class='alert alert-success text-center' role='alert'>Categoria inserida com sucesso!</div>";
+                    ViewData["Valida"] = "<div class='alert alert-success text-center' role='alert'>Sub-Categoria inserida com sucesso!</div>";
                 }
                 else
                 {
@@ -91,23 +96,23 @@ namespace PEV.Controllers
             {
                 if (Cat.UpdateDados(obj))
                 {
-                    ViewData["Valida"] = "<div class='alert alert-success text-center' role='alert'>Categoria atualizada com sucesso!</div>";
+                    ViewData["Valida"] = "<div class='alert alert-success text-center' role='alert'>Sub-Categoria atualizada com sucesso!</div>";
                 }
                 else
                 {
-                    ViewData["Valida"] = "<div class='alert alert-danger text-center' role='alert'>Erro ao atualizar Categoria!</div>";
+                    ViewData["Valida"] = "<div class='alert alert-danger text-center' role='alert'>Erro ao atualizar Sub-Categoria!</div>";
                 }
 
             }
-                return View("cadastrocategoria");
+                return View("cadastrosubcategoria");
         }
 
-        public string Validar(tb_categoria obj)
+        public string Validar(tb_subcategoria obj)
         {
 
-            CategoriaDB Cat = new CategoriaDB();
+            SubCategoriaDB Cat = new SubCategoriaDB();
 
-            if (String.IsNullOrEmpty(obj.Descricao))
+            if (String.IsNullOrEmpty(obj.Nome))
             {
                 return "<div class='alert alert-warning text-center' role='alert'>Digite o nome da categoria</div>";
             }

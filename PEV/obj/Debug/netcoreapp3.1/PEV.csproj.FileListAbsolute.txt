@@ -2852,3 +2852,8 @@ C:\PEV\PEV\obj\Debug\netcoreapp3.1\Razor\Views\Shared\Components\Categorias\Defa
 C:\PEV\PEV\obj\Debug\netcoreapp3.1\Razor\Views\Home\CategoriasMenu.cshtml.g.cs
 C:\PEV\PEV\obj\Debug\netcoreapp3.1\Razor\Views\Shared\Components\Busca\Default.cshtml.g.cs
 C:\PEV\PEV\obj\Debug\netcoreapp3.1\Razor\Views\Home\Busca.cshtml.g.cs
+C:\PEV\PEV\obj\Debug\netcoreapp3.1\Razor\Views\Shared\Components\TodasCategorias\Default.cshtml.g.cs
+C:\PEV\PEV\obj\Debug\netcoreapp3.1\Razor\Views\SubCategoria\CadastroSubCategoria.cshtml.g.cs
+C:\PEV\PEV\obj\Debug\netcoreapp3.1\Razor\Views\SubCategoria\Index.cshtml.g.cs
+C:\PEV\PEV\obj\Debug\netcoreapp3.1\Razor\Views\Shared\Components\Subcategorias\Default.cshtml.g.cs
+C:\PEV\PEV\obj\Debug\netcoreapp3.1\Razor\Views\SubCategoria\SubcategoriasMenu.cshtml.g.cs

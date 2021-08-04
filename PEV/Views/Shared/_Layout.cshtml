@@ -102,7 +102,6 @@
                             </a> <!-- Pesquisar -->
                         </div>
                         <vc:busca></vc:busca>
-
                         <div class="">
                             <div class="widgets-wrap d-flex justify-content-end">
                                 <div class="widget-header">
@@ -154,7 +153,6 @@
                                         <div class="dropdown-menu dropdown-menu-right" x-placement="bottom-end" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(140px, 46px, 0px);">
                                             <a class="nav-link text-dark" asp-area="" asp-controller="Login" asp-action="Index">Olá, <span class="name-user">@ViewData["NomeLogin"]</span></a>
                                             <hr class="dropdown-divider">
-
                                             <a class="dropdown-item" asp-area="" asp-controller="Menu" asp-action="MeusPedidos">Meus pedidos</a>
                                             <a class="dropdown-item" asp-area="" asp-controller="Menu" asp-action="EditaSSenha">Meus dados</a>
                                             <a class="dropdown-item icontext" asp-area="" asp-controller="Login" asp-action="Logout">
@@ -165,10 +163,7 @@
                                             </a>
                                         </div>
                                     </div>
-
                                 }
-
-
                             </div>
                         </div>
                     </div>
@@ -179,12 +174,13 @@
                     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#main_nav7" aria-expanded="false" aria-label="Toggle navigation">
                         <span class="navbar-toggler-icon"></span>
                     </button>
+                    <vc:todas-categorias></vc:todas-categorias>
                     <div class="collapse navbar-collapse" id="main_nav7">
                         <ul class="navbar-nav">
-                            <li class="nav-item">
+                            @*<li class="nav-item">
                                 <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index">Todos</a>
-                            </li>
-                            <li class="nav-item">
+                            </li>*@
+                            @*<li class="nav-item">
                                 <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Masculino">Masculino</a>
                             </li>
                             <li class="nav-item">
@@ -192,8 +188,8 @@
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Infantil">Infantil</a>
-                            </li>
-                            <vc:categorias></vc:categorias>
+                            </li>*@
+                            <vc:subcategorias></vc:subcategorias>
                             @if (ViewData["Tipo"].ToString() == "A")
                             {
                                 <li class="nav-item">

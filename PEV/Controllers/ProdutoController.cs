@@ -81,11 +81,12 @@ namespace PEV.Controllers
             ProdutoDB Tam = new ProdutoDB();
             ProdutoDB Cat = new ProdutoDB();
 
+
             ViewData["NomeLogin"] = CMetodos_Autenticacao.GET_DadosUser(_hCont, CMetodos_Autenticacao.eDadosUser.Nome);
             ViewData["Tipo"] = CMetodos_Autenticacao.GET_DadosUser(_hCont, CMetodos_Autenticacao.eDadosUser.Tipo);
             ViewData["LTGenero"] = Gen.GetGenero();
             ViewData["LTTam"] = Tam.GetTamanho();
-            ViewData["LTCat"] = Cat.GetCategoria();
+            ViewData["LTCat"] = Cat.GetSubcategoria();
 
             ViewData["Valida"] = "";
             return View();
@@ -100,7 +101,7 @@ namespace PEV.Controllers
 
             ViewData["LTGenero"] = Gen.GetGenero();
             ViewData["LTTam"] = Tam.GetTamanho();
-            ViewData["LTCat"] = Cat.GetCategoria();
+            ViewData["LTCat"] = Cat.GetSubcategoria();
 
             ProdutoDB Prod = new ProdutoDB();
 

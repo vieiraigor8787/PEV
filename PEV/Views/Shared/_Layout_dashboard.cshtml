@@ -58,11 +58,11 @@
                     </li>
 
                     @* <li>
-                            <a asp-area="" asp-controller="Usuario" asp-action="index">
-                                <i class="fa fa-briefcase"></i>
-                                <span class="menu-text">Colaborador</span>
-                            </a>
-                        </li> *@
+            <a asp-area="" asp-controller="Usuario" asp-action="index">
+                <i class="fa fa-briefcase"></i>
+                <span class="menu-text">Colaborador</span>
+            </a>
+        </li> *@
                     <li>
                         <a asp-area="" asp-controller="Usuario" asp-action="Cliente">
                             <i class="fa fa-users"></i>
@@ -89,6 +89,14 @@
                         <ul class="sub-menu children dropdown-menu">
                             <li><i class="fa fa-bars"></i><a asp-controller="Categoria" asp-action="Index">Lista de categorias</a></li>
                             <li><i class="fa fa-table"></i><a asp-controller="Categoria" asp-action="CadastroCategoria">Cadastrar categoria</a></li>
+                            @*<li><i class="fa fa-times"></i><a href="">Remover categoria</a></li>*@
+                        </ul>
+                    </li>
+                    <li class="menu-item-has-children dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-check-square-o"></i>Subcategorias</a>
+                        <ul class="sub-menu children dropdown-menu">
+                            <li><i class="fa fa-bars"></i><a asp-controller="SubCategoria" asp-action="Index">Lista de Subcategorias</a></li>
+                            <li><i class="fa fa-table"></i><a asp-controller="SubCategoria" asp-action="CadastroSubCategoria">Cadastrar Subcategoria</a></li>
                             @*<li><i class="fa fa-times"></i><a href="">Remover categoria</a></li>*@
                         </ul>
                     </li>

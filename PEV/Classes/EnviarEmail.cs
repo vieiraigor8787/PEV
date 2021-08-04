@@ -1,4 +1,6 @@
-﻿using System;
+﻿using MySql.Data.MySqlClient;
+using PEV.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
@@ -36,6 +38,48 @@ namespace PEV.Classes
                 return false;
             }
         }
+
+        public tb_venda EmailPedido(int CodVenda)
+        {
+
+            try
+            {
+                string sSQL = "";
+                MySqlCommand cmd = new MySqlCommand();
+                MySqlConnection cn = new MySqlConnection(CConexao.Get_StringConexao());
+                cn.Open();
+
+
+                sSQL = "SELECT v.CodigoVenda, v.CodigoLogin, v.`Status`, l.Email FROM tb_venda AS v " +
+                       "INNER JOIN tb_login AS l ON v.CodigoLogin = l.CodigoLogin WHERE v.CodigoVenda=" + CodVenda;
+
+                cmd.CommandText = sSQL;
+                cmd.Connection = cn;
+                var DrVenda = cmd.ExecuteReader();
+
+                DrVenda.Read();
+
+                var eEmail = new tb_venda
+                {
+                    Email = DrVenda["Email"].ToString(),
+                    Status = DrVenda["Status"].ToString()
+                };
+
+                var model = new tb_venda();
+                model.Email = eEmail.Email.ToString();
+                model.Status = eEmail.Status.ToString();
+
+                return model;
+            }
+            catch (Exception e)
+            {
+                string msg = e.Message;
+                var model = new tb_venda();
+                model.Email = "Sem Registros!";
+                return model;
+            }
+        }
+
 
     }
 

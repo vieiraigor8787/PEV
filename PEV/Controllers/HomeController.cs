@@ -16,6 +16,9 @@ using System.Data;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Net;
+using System.Xml;
+using System.Text;
 
 namespace PEV.Controllers
 {
@@ -57,21 +60,6 @@ namespace PEV.Controllers
 
             ProdutoDB Prod = new ProdutoDB();
             var resp = Prod.GetProdutoVWListInfantil();
-
-            ViewData["NomeLogin"] = CMetodos_Autenticacao.GET_DadosUser(_hCont, CMetodos_Autenticacao.eDadosUser.Nome);
-            ViewData["Tipo"] = CMetodos_Autenticacao.GET_DadosUser(_hCont, CMetodos_Autenticacao.eDadosUser.Tipo);
-
-            var RespCar = _Carrinho.GetAllDB();
-            ViewData["TotalCarrinho"] = (RespCar != null) ? RespCar.Sum(c => c.Quantidade) : 0;
-
-            return View(resp);
-        }
-
-        public IActionResult CategoriasMenu(string Descricao)
-        {
-
-            ProdutoDB Prod = new ProdutoDB();
-            var resp = Prod.GetProdutoVWListCategoria(Descricao);
 
             ViewData["NomeLogin"] = CMetodos_Autenticacao.GET_DadosUser(_hCont, CMetodos_Autenticacao.eDadosUser.Nome);
             ViewData["Tipo"] = CMetodos_Autenticacao.GET_DadosUser(_hCont, CMetodos_Autenticacao.eDadosUser.Tipo);
@@ -338,6 +326,65 @@ namespace PEV.Controllers
 
             return View();
         }
+
+        [HttpPost]
+        public JsonResult Checkout(FinalizarPedidoVM obj)
+        {
+            //URI de checkout.
+            string uri = @"https://ws.pagseguro.uol.com.br/v2/checkout";
+
+            //Conjunto de parâmetros/formData.
+            System.Collections.Specialized.NameValueCollection postData = new System.Collections.Specialized.NameValueCollection();
+            postData.Add("email", "danieltoguti@gmail.com");
+            postData.Add("token", "2cd2eb37-563a-4360-9483-2a2f272aed6d0489e06b44a08cb92fd03926cf2f2be4b5bd-47f0-4d83-951f-a6094f300510");
+            postData.Add("currency", "BRL");
+            postData.Add("itemId1", "0001");
+            postData.Add("itemDescription1", "ProdutoPagSeguroI");
+            postData.Add("itemAmount1", "3.00");
+            postData.Add("itemQuantity1", "1");
+            postData.Add("itemWeight1", "200");
+            postData.Add("reference", "REF1234");
+            postData.Add("senderName", "Jose Comprador");
+            postData.Add("senderAreaCode", "44");
+            postData.Add("senderPhone", "999999999");
+            postData.Add("senderEmail", "comprador@uol.com.br");
+            postData.Add("shippingAddressRequired", "false");
+
+            //String que receberá o XML de retorno.
+            string xmlString = null;
+
+            //Webclient faz o post para o servidor de pagseguro.
+            using (WebClient wc = new WebClient())
+            {
+                //Informa header sobre URL.
+                wc.Headers[HttpRequestHeader.ContentType] = "application/x-www-form-urlencoded";
+
+                //Faz o POST e retorna o XML contendo resposta do servidor do pagseguro.
+                var result = wc.UploadValues(uri, postData);
+
+                //Obtém string do XML.
+                xmlString = Encoding.ASCII.GetString(result);
+            }
+
+            //Cria documento XML.
+            XmlDocument xmlDoc = new XmlDocument();
+
+            //Carrega documento XML por string.
+            xmlDoc.LoadXml(xmlString);
+
+            //Obtém código de transação (Checkout).
+            var code = xmlDoc.GetElementsByTagName("code")[0];
+
+            //Obtém data de transação (Checkout).
+            var date = xmlDoc.GetElementsByTagName("date")[0];
+
+            //Monta a URL para pagamento.
+            var paymentUrl = string.Concat("https://pagseguro.uol.com.br/v2/checkout/payment.html?code=", code.InnerText);
+
+            //Retorna dados para HTML.
+            return Json(paymentUrl);
+        }
+
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
