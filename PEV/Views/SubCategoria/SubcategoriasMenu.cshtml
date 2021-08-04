@@ -1,5 +1,4 @@
-﻿
-@{
+﻿@{
     @model List<ProdutoVWList>;
     ViewData["Title"] = "Home Page"; }
 
@@ -32,46 +31,8 @@
     {
         <div class="card col-md-3 text-center">
             <div>
-                <div>Nenhum Produto Encontrado</div>
+                <div>Não temos produtos nessa subcategoria</div>
             </div>
         </div>
     }
 </div>
-
-
-<button class="checkout">Checkout</button>
-
-<script src="~/Scripts/jquery-3.2.1.min.js"></script>
-<script type="text/javascript">
-
-    $(document).ready(function () {
-        $(".checkout").click(function () {
-            if (confirm("Tem certeza que deseja fazer checkout no pagseguro?")) {
-
-                $.ajax({
-                    url: "/Home/Checkout",
-                    method: "post",
-                    type: "json",
-                    success: function (data) {
-                        window.location = data;
-                    }
-                });
-            }
-        });
-
-        $(".consultaTransacao").click(function () {
-            if (confirm("Tem certeza que deseja consultar transação?")) {
-
-                $.ajax({
-                    url: "/Home/ConsultaTransacao",
-                    method: "post",
-                    type: "json",
-                    success: function (data) {
-                        alert(data);
-                    }
-                })
-            }
-        });
-
-    });
-</script>

@@ -1,0 +1,164 @@
+﻿
+@{
+    @model tb_subcategoria;
+    ViewData["Title"] = "Sub-Categorias";
+
+    Layout = "_Layout_dashboard";
+
+    var LTCat = (List<SelectListItem>)(@ViewData["LTCat"]);
+}
+
+<h4>Sub-Categorias</h4>
+@Html.Raw(ViewData["Valida"])
+
+<form id="FormProduto"asp-action="Salvar" asp-controller="SubCategoria">
+    <div class="form">
+        <label asp-for="Nome"></label>
+        <input type="text" class="form-control" asp-for="Nome">
+        <label asp-for="Menu"></label>
+        <select type="text" class="form-control" asp-for="Menu">
+            <option value="Sim">Sim</option>
+            <option value="Não">Não</option>
+        </select>
+        <input type="hidden" asp-for="JsonLTCategoria">
+        <input type="hidden" asp-for="CodigoSubCategoria">
+    </div>
+    <h5><b>Categoria</b></h5>
+    <hr />
+
+    <div class="row">
+        <div class="form-group col-md-4">
+            <select id="txt_Categoria" asp-items="LTCat" class="form-control"></select>
+        </div>
+        <div class="form-group col-md-4">
+            <button type="button" class="btn btn-success" onclick="Add('C','txt_Categoria');">Adicionar Categoria</button>
+        </div>
+        <div>
+            <table id="tb_categoria" class="table">
+                <thead>
+                    <tr>
+                        <th>Categoria Selecionado</th>
+                    </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <hr />
+    <button type="submit" class="btn btn-primary">Registrar</button>
+</form>
+
+
+
+<script>
+
+    var MtzCategoria;
+
+
+    $(document).ready(function () {
+
+        SetSubmit();
+
+        MtzCategoria = StartMTZ(MtzCategoria, "JsonLTCategoria");
+
+        Get_Mtzs("JsonLTCategoria", MtzCategoria, "tb_categoria", "C");
+
+    });
+
+
+    function StartMTZ(Mtz, IdJson) {
+        if ($("#" + IdJson).val() != "") {
+            Mtz = JSON.parse($("#" + IdJson).val());
+        }
+        else {
+            Mtz = [];
+        }
+        return Mtz;
+    }
+
+    function Add(Tipo, obj) {
+        var Descricao = $("#" + obj + " option:selected").text();
+        var Codigo = $("#" + obj + " option:selected").val();
+
+        switch (Tipo) {
+            case "C":
+                AddMTZ(MtzCategoria, Codigo, Descricao, "JsonLTCategoria", "tb_categoria", Tipo);
+                break;
+        }
+    }
+
+
+    function AddMTZ(Mtz, _Codigo, _Descricao, idJson, TB, Tipo) {
+
+        Mtz.push(
+            {
+                'Codigo': _Codigo,
+                'Descricao': _Descricao,
+            }
+        );
+
+        Get_Mtzs(idJson, Mtz, TB, Tipo);
+    }
+
+    function Get_Mtzs(idJson, Mtz, TB, Tipo) {
+        $("#" + idJson).val(JSON.stringify(Mtz));
+        $("#" + TB + " > tbody ").html("");
+        var sHtml = "";
+        for (var x = 0; x <= Mtz.length - 1; x++) {
+            sHtml = "<tr>";
+            if (Tipo == "F") {
+                sHtml += "<td><img src='" + Mtz[x].Descricao + "'  width=60 height=40></td>";
+            }
+            else {
+                sHtml += "<td>" + Mtz[x].Descricao + "</td>";
+            }
+            sHtml += "<td><a href='##' onclick='ExcluirItem(\"" + Tipo + "\",this," + x + ")'>Excluir</a></td>";
+            sHtml += "</tr>";
+            $("#" + TB + " > tbody ").append(sHtml);
+        }
+    }
+
+    function ExcluirItem(Tipo, obj, index) {
+        $(obj).closest('tr').remove();
+
+        switch (Tipo) {
+
+            case "C":
+                delete MtzCategoria[index];
+                MtzGenero.splice(index, 1);
+                Get_Mtzs("JsonLTCategoria", MtzCategoria, "tb_categoria", Tipo);
+                break;
+
+        }
+    }
+
+    function SetSubmit() {
+        $('#FormProduto').submit(function (e) {
+            e.preventDefault();
+            var form = $(this);
+            var url = form.attr('action');
+            $.ajax({
+                type: "POST",
+                url: url,
+                data: form.serialize(),
+                success: function (data) {
+                    if (data.success) {
+                        alertSucesso(data.msg);
+                    } else {
+
+                        if (data.msg.indexOf("Erro") > -1) {
+                            alertErro(data.msg);
+                        }
+                        else {
+                            alertInformacao(data.msg);
+                        }
+                    }
+                }
+            });
+
+        });
+    }
+
+</script>
+

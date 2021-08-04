@@ -16,6 +16,7 @@ namespace PEV.Models
         public string JsonLTGenero { get; set; }
         public string JsonLTamanho { get; set; }
         public string JsonLTCategoria { get; set; }
+        public string JsonLTSubcategoria { get; set; }
     }
 
     public class ProdutoView

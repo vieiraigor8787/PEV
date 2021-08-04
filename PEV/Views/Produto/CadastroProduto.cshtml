@@ -3,7 +3,7 @@
 @{ ViewData["Title"] = "CadastroProduto";
     var LTGenero = (List<SelectListItem>)(@ViewData["LTGenero"]);
     var LTTam = (List<SelectListItem>)(@ViewData["LTTam"]);
-    var LTCat = (List<SelectListItem>)(@ViewData["LTCat"]);
+    var LTSubcat = (List<SelectListItem>)(@ViewData["LTCat"]);
 
     Layout = "_Layout_dashboard"; }
 
@@ -80,7 +80,7 @@
         <input type="hidden" asp-for="JsonLTGenero">
         <!--<input type="hidden" asp-for="JsonLTTamanho">-->
         <input type="hidden" asp-for="JsonLTFoto">
-        <input type="hidden" asp-for="JsonLTCategoria">
+        <input type="hidden" asp-for="JsonLTSubcategoria">
     </div>
 
 
@@ -137,21 +137,21 @@
     </div>
     <hr />
 
-    <h5><b>Categoria</b></h5>
+<h5><b>Subcategoria</b></h5>
     <hr />
 
     <div class="row">
         <div class="form-group col-md-4">
-            <select id="txt_Categoria" asp-items="LTCat" class="form-control"></select>
+            <select id="txt_subcategoria" asp-items="LTSubcat" class="form-control"></select>
         </div>
         <div class="form-group col-md-4">
-            <button type="button" class="btn btn-success" onclick="Add('C','txt_Categoria');">Adicionar Categoria</button>
+            <button type="button" class="btn btn-success" onclick="Add('C','txt_subcategoria');">Adicionar Subcategoria</button>
         </div>
         <div>
-            <table id="tb_categoria" class="table">
+            <table id="tb_subcategoria" class="table">
                 <thead>
                     <tr>
-                        <th>Categoria Selecionado</th>
+                        <th>Subcategoria Selecionado</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -176,7 +176,7 @@
 
     var MtzFoto;
     var MtzGenero;
-    var MtzCategoria;
+    var MtzSubcategoria;
     //var MtzTamanho;
 
     $(document).ready(function () {
@@ -184,12 +184,12 @@
         SetSubmit();
 
         MtzGenero = StartMTZ(MtzGenero, "JsonLTGenero");
-        MtzCategoria = StartMTZ(MtzCategoria, "JsonLTCategoria");
+        MtzSubcategoria = StartMTZ(MtzSubcategoria, "JsonLTSubcategoria");
         //MtzTamanho = StartMTZ(MtzTamanho, "JsonLTTamanho");
         MtzFoto = StartMTZ(MtzFoto, "JsonLTFoto");
 
         Get_Mtzs("JsonLTGenero", MtzGenero, "tb_genero", "G");
-        Get_Mtzs("JsonLTCategoria", MtzCategoria, "tb_categoria", "C");
+        Get_Mtzs("JsonLTSubcategoria", MtzSubcategoria, "tb_subcategoria", "C");
         //Get_Mtzs("JsonLTTamanho", MtzTamanho, "tb_tamanho", "T");
         Get_Mtzs("JsonLTFoto", MtzFoto, "tb_Foto", "F");
 
@@ -217,7 +217,7 @@
                 AddMTZ(MtzGenero, Codigo, Descricao, "JsonLTGenero", "tb_genero", Tipo);
                 break;
             case "C":
-                AddMTZ(MtzCategoria, Codigo, Descricao, "JsonLTCategoria", "tb_categoria", Tipo);
+                AddMTZ(MtzSubcategoria, Codigo, Descricao, "JsonLTSubcategoria", "tb_subcategoria", Tipo);
                 break;
             //case "T":
             //    AddMTZ(MtzTamanho, Codigo, Descricao, "JsonLTTamanho", "tb_tamanho", Tipo);
@@ -274,9 +274,9 @@
                 break;
 
             case "C":
-                delete MtzCategoria[index];
-                MtzGenero.splice(index, 1);
-                Get_Mtzs("JsonLTCategoria", MtzCategoria, "tb_categoria", Tipo);
+                delete MtzSubcategoria[index];
+                MtzSubcategoria.splice(index, 1);
+                Get_Mtzs("JsonLTSubcategoria", MtzSubcategoria, "tb_subcategoria", Tipo);
                 break;
 
             //case "T":

@@ -134,6 +134,17 @@ namespace PEV.Controllers
 
             if (Venda.UpDateStatus(obj))
             {
+                var CodVenda = obj.CodigoVenda;
+                EnviarEmail EmailCliente = new EnviarEmail();
+                var Email = EmailCliente.EmailPedido(CodVenda).Email.ToString();
+
+                var Status = EmailCliente.EmailPedido(CodVenda).Status.ToString();
+
+                LoginDB LerCodigoLogin = new LoginDB();
+                EnviarEmail Send = new EnviarEmail();
+                string Msg = "Sua compra está no status de: " + Status;
+                string Titulo = "Status da Compra Atualizado!";
+                Send.Enviar(Email, Msg, Titulo);
                 ViewData["Valida"] = "<div class='alert alert-success text-center' role='alert'>Status atualizado com sucesso!</div>";
             }
             else

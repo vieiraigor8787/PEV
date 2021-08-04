@@ -1,0 +1,10 @@
+﻿.dropdown-large {
+    padding: 1rem;
+}
+
+/* ============ desktop view ============ */
+@media all and (min-width: 992px) {
+    .dropdown-large {
+        min-width: 500px;
+    }
+}

@@ -6,11 +6,10 @@ using System.Threading.Tasks;
 
 namespace PEV.Models
 {
-    public class tb_categoria
+    public class tb_categoria_subcategoria
     {
+        public int CodigoCategoriaSubcategoria { get; set; }
         public int CodigoCategoria { get; set; }
-        public string Descricao { get; set; }
-        public string Nome { get; set; }
     }
 
 }
