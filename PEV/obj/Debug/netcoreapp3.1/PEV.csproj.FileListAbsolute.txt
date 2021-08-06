@@ -2857,3 +2857,4 @@ C:\PEV\PEV\obj\Debug\netcoreapp3.1\Razor\Views\SubCategoria\CadastroSubCategoria
 C:\PEV\PEV\obj\Debug\netcoreapp3.1\Razor\Views\SubCategoria\Index.cshtml.g.cs
 C:\PEV\PEV\obj\Debug\netcoreapp3.1\Razor\Views\Shared\Components\Subcategorias\Default.cshtml.g.cs
 C:\PEV\PEV\obj\Debug\netcoreapp3.1\Razor\Views\SubCategoria\SubcategoriasMenu.cshtml.g.cs
+C:\PEV\PEV\obj\Debug\netcoreapp3.1\Razor\Views\Dashboard\Home.cshtml.g.cs

@@ -174,7 +174,7 @@ namespace PEV.Data
                 MySqlConnection cn = new MySqlConnection(CConexao.Get_StringConexao());
                 cn.Open();
 
-                sSQL = "select * from tb_subcategoria where Ativo='Sim' order by Nome";
+                sSQL = "select * from tb_subcategoria where Ativo='Sim' order by Nome LIMIT 5";
                 cmd.CommandText = sSQL;
                 cmd.Connection = cn;
                 var Dr = cmd.ExecuteReader();
