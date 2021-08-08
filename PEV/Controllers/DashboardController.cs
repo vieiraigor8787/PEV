@@ -83,6 +83,13 @@ namespace PEV.Controllers
             return View(MLista);
         }
 
+
+        [Authorize(Roles = "A")]
+        public IActionResult Cadastros()
+        {
+            return View();
+        }
+
         [Authorize(Roles = "A")]
         public IActionResult Home()
         {
