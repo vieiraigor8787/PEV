@@ -2842,7 +2842,6 @@ C:\PEV\PEV\obj\Debug\netcoreapp3.1\PEV.csproj.CopyComplete
 C:\PEV\PEV\obj\Debug\netcoreapp3.1\PEV.dll
 C:\PEV\PEV\obj\Debug\netcoreapp3.1\PEV.pdb
 C:\PEV\PEV\obj\Debug\netcoreapp3.1\PEV.genruntimeconfig.cache
-C:\PEV\PEV\obj\Debug\netcoreapp3.1\Razor\Views\Dashboard\_ProdutoSemVenda.cshtml.g.cs
 C:\PEV\PEV\obj\Debug\netcoreapp3.1\PEV.csproj.AssemblyReference.cache
 C:\PEV\PEV\obj\Debug\netcoreapp3.1\scopedcss\bundle\PEV.styles.css
 C:\PEV\PEV\obj\Debug\netcoreapp3.1\Razor\Views\Usuario\Cliente.cshtml.g.cs
@@ -2857,3 +2856,5 @@ C:\PEV\PEV\obj\Debug\netcoreapp3.1\Razor\Views\SubCategoria\CadastroSubCategoria
 C:\PEV\PEV\obj\Debug\netcoreapp3.1\Razor\Views\SubCategoria\Index.cshtml.g.cs
 C:\PEV\PEV\obj\Debug\netcoreapp3.1\Razor\Views\Shared\Components\Subcategorias\Default.cshtml.g.cs
 C:\PEV\PEV\obj\Debug\netcoreapp3.1\Razor\Views\SubCategoria\SubcategoriasMenu.cshtml.g.cs
+C:\PEV\PEV\obj\Debug\netcoreapp3.1\Razor\Views\Dashboard\Home.cshtml.g.cs
+C:\PEV\PEV\obj\Debug\netcoreapp3.1\Razor\Views\Dashboard\Cadastros.cshtml.g.cs
