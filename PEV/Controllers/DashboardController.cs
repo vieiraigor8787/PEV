@@ -91,10 +91,66 @@ namespace PEV.Controllers
         }
 
         [Authorize(Roles = "A")]
+        public IActionResult Logomarca()
+        {
+            ViewData["Valida"] = "";
+            return View();
+        }
+
+        [Authorize(Roles = "A")]
+        public IActionResult SalvarLogo(LogomarcaModel obj)
+        {
+            //string smgvalida = Validar(obj);
+            //if (smgvalida != "")
+            //{
+            //    return Json(new { success = false, msg = smgvalida });
+            //}
+
+            LogoDB Log = new LogoDB();
+
+
+            if (Log.InserirLogo(obj))
+            {
+                return Json(new { success = true, msg = "Produto Cadastrado com Sucesso!" });
+            }
+            else
+            {
+                return Json(new { success = false, msg = "Erro ao Cadastrar!" });
+            }
+
+
+            //else
+            //{
+            //    if (Prod.UpdateDados(obj))
+            //    {
+            //        return Json(new { success = true, msg = "Produto Atualizado com Sucesso!" });
+            //    }
+            //    else if (Prod.ValidarTamanho(obj))
+            //    {
+
+            //        if (Prod.UpdateDados(obj))
+            //        {
+            //            return Json(new { success = true, msg = "Produto Atualizado com Sucesso!" });
+            //        }
+            //        else
+            //        {
+            //            return Json(new { success = false, msg = "Erro ao Cadastrar!" });
+            //        }
+            //    }
+            //    else
+            //    {
+            //        return Json(new { success = false, msg = "Erro ao Cadastrar!" });
+            //    }
+            //}
+
+            return Json(new { success = false, msg = "Erro ao Cadastrar!" });
+        }
+
+        [Authorize(Roles = "A")]
         public IActionResult Home()
         {
 
-            RelatorioDB Col = new RelatorioDB();
+            //RelatorioDB Col = new RelatorioDB();
             RelatorioDB Prod = new RelatorioDB();
             RelatorioDB ProdQuant = new RelatorioDB();
             RelatorioDB Cli = new RelatorioDB();
@@ -113,11 +169,11 @@ namespace PEV.Controllers
             RelatorioDB NomeProdutoMaisVendido = new RelatorioDB();
             RelatorioDB NomeProdutoMaisVendidoQuantidade = new RelatorioDB();
 
-            RelatorioDB GeneroNome = new RelatorioDB();
-            RelatorioDB GeneroQuantidade = new RelatorioDB();
+            //RelatorioDB GeneroNome = new RelatorioDB();
+            //RelatorioDB GeneroQuantidade = new RelatorioDB();
 
 
-            ViewData["VDColaboradores"] = Col.Colaboradores().TotalColaborador;
+            //ViewData["VDColaboradores"] = Col.Colaboradores().TotalColaborador;
             ViewData["VDClientes"] = Cli.Clientes().TotalCliente;
             ViewData["VDProdutos"] = Prod.Produtos().TotalProduto;
             ViewData["VDQuantidadeProdutos"] = ProdQuant.QuantidadeProdutos().QuantidadeTotal;
@@ -137,8 +193,8 @@ namespace PEV.Controllers
             ViewData["VDNomeProdutoMaisVendidoNome"] = NomeProdutoMaisVendido.NomeProdutoMaisVendido().Nome;
             ViewData["VDNomeProdutoMaisVendidoQuantidade"] = NomeProdutoMaisVendidoQuantidade.NomeProdutoMaisVendido().Quantidade;
 
-            ViewData["VDGeneroNome"] = GeneroNome.GeneroMaisVendido().Descricao;
-            ViewData["VDGeneroQuantidade"] = GeneroQuantidade.GeneroMaisVendido().Quantidade;
+            //ViewData["VDGeneroNome"] = GeneroNome.GeneroMaisVendido().Descricao;
+            //ViewData["VDGeneroQuantidade"] = GeneroQuantidade.GeneroMaisVendido().Quantidade;
 
             ViewData["NomeLogin"] = CMetodos_Autenticacao.GET_DadosUser(_hCont, CMetodos_Autenticacao.eDadosUser.Nome);
             ViewData["Tipo"] = CMetodos_Autenticacao.GET_DadosUser(_hCont, CMetodos_Autenticacao.eDadosUser.Tipo);

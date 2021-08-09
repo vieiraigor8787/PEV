@@ -74,8 +74,7 @@ namespace PEV.Controllers
             string smgvalida = Validar(obj);
             if (smgvalida != "")
             {
-                ViewData["Valida"] = smgvalida;
-                return View("CadastroSubcategoria");
+                return Json(new { success = false, msg = smgvalida });
             }
 
             SubCategoriaDB Cat = new SubCategoriaDB();
@@ -85,26 +84,26 @@ namespace PEV.Controllers
 
                 if (Cat.InserirDados(obj))
                 {
-                    ViewData["Valida"] = "<div class='alert alert-success text-center' role='alert'>Sub-Categoria inserida com sucesso!</div>";
+                    return Json(new { success = true, msg = "Subcategoria Cadastrada com Sucesso!" });
                 }
                 else
                 {
-                    ViewData["Valida"] = "<div class='alert alert-danger text-center' role='alert'>Erro ao inserir Categoria!</div>";
+                    return Json(new { success = false, msg = "Erro ao Cadastrar!" });
                 }
             }
             else
             {
                 if (Cat.UpdateDados(obj))
                 {
-                    ViewData["Valida"] = "<div class='alert alert-success text-center' role='alert'>Sub-Categoria atualizada com sucesso!</div>";
+                    return Json(new { success = true, msg = "Subcategoria Atualizada com Sucesso!" });
                 }
                 else
                 {
-                    ViewData["Valida"] = "<div class='alert alert-danger text-center' role='alert'>Erro ao atualizar Sub-Categoria!</div>";
+                    return Json(new { success = true, msg = "Subcategoria Atualizada com Sucesso!" });
                 }
 
             }
-                return View("cadastrosubcategoria");
+                //return View("cadastrosubcategoria");
         }
 
         public string Validar(tb_subcategoria obj)

@@ -38,7 +38,7 @@ namespace PEV.Data
                 var proGeneros = JsonConvert.DeserializeObject<List<tb_produto_genero>>(obj.JsonLTGenero, settings);
                 var proSubcategoria = JsonConvert.DeserializeObject<List<tb_produto_subcategoria>>(obj.JsonLTSubcategoria, settings);
 
-                sSQL = "insert into tb_produto (CodigoInterno, Nome, Descricao, valor, dataregistro, peso, quantidade, ativo, tamanho)values(@codigointerno, @nome, @descricao, @valor, Now(), @peso, @quantidade, @ativo, @tamanho)";
+                sSQL = "insert into tb_produto (CodigoInterno, Nome, Descricao, valor, dataregistro, peso, quantidade, ativo, tamanho, MensagemEstoque)values(@codigointerno, @nome, @descricao, @valor, Now(), @peso, @quantidade, @ativo, @tamanho, @MensagemEstoque)";
                 cmd.Parameters.AddWithValue("@codigointerno", obj.tb_produto.CodigoInterno);
                 cmd.Parameters.AddWithValue("@nome", obj.tb_produto.Nome);
                 cmd.Parameters.AddWithValue("@descricao", obj.tb_produto.Descricao);
@@ -47,6 +47,7 @@ namespace PEV.Data
                 cmd.Parameters.AddWithValue("@quantidade", obj.tb_produto.Quantidade);
                 cmd.Parameters.AddWithValue("@ativo", obj.tb_produto.Ativo);
                 cmd.Parameters.AddWithValue("@tamanho", obj.tb_produto.Tamanho);
+                cmd.Parameters.AddWithValue("@MensagemEstoque", obj.tb_produto.MensagemEstoqueBaixo);
 
                 cmd.CommandText = sSQL;
                 cmd.Connection = cn;
@@ -147,7 +148,7 @@ namespace PEV.Data
                 var proSubcategoria = JsonConvert.DeserializeObject<List<tb_produto_subcategoria>>(obj.JsonLTSubcategoria, settings);
 
                 sSQL = " update tb_produto set CodigoInterno=@codigointerno, Nome=@nome, Descricao=@descricao, valor=@valor, peso=@peso, quantidade=@quantidade, ativo=@ativo," +
-                       " tamanho=@tamanho where CodigoProduto=" + obj.tb_produto.CodigoProduto;
+                       " tamanho=@tamanho, MensagemEstoque=@MensagemEstoque where CodigoProduto=" + obj.tb_produto.CodigoProduto;
 
                 cmd.Parameters.AddWithValue("@codigointerno", obj.tb_produto.CodigoInterno);
                 cmd.Parameters.AddWithValue("@nome", obj.tb_produto.Nome);
@@ -157,6 +158,7 @@ namespace PEV.Data
                 cmd.Parameters.AddWithValue("@quantidade", obj.tb_produto.Quantidade);
                 cmd.Parameters.AddWithValue("@ativo", obj.tb_produto.Ativo);
                 cmd.Parameters.AddWithValue("@tamanho", obj.tb_produto.Tamanho);
+                cmd.Parameters.AddWithValue("@MensagemEstoque", obj.tb_produto.MensagemEstoqueBaixo);
                 cmd.CommandText = sSQL;
                 cmd.Connection = cn;
                 int result = cmd.ExecuteNonQuery();
@@ -445,6 +447,50 @@ namespace PEV.Data
                         Quantidade = Convert.ToInt32(Dr["Quantidade"]),
                         Peso = Convert.ToDouble(Dr["Peso"]),
                         Ativo = Dr["Ativo"].ToString(),
+                        Tamanho = Dr["Tamanho"].ToString(),
+                        MensagemEstoqueBaixo = Dr["MensagemEstoque"].ToString()
+                    };
+                    Lista.Add(item);
+                }
+
+                return Lista;
+            }
+            catch (Exception e)
+            {
+                string msg = e.Message;
+                return null;
+            }
+        }
+
+        public List<tb_produto> EstoqueBaixo()
+        {
+            try
+            {
+                string sSQL = "";
+                MySqlCommand cmd = new MySqlCommand();
+                MySqlConnection cn = new MySqlConnection(CConexao.Get_StringConexao());
+                cn.Open();
+
+                sSQL = "SELECT * FROM tb_produto WHERE Quantidade < 5 AND MensagemEstoque='Sim'";
+
+                cmd.CommandText = sSQL;
+                cmd.Connection = cn;
+                var Dr = cmd.ExecuteReader();
+
+                var Lista = new List<tb_produto>();
+
+                while (Dr.Read())
+                {
+                    var item = new tb_produto
+                    {
+                        CodigoProduto = Convert.ToInt32(Dr["CodigoProduto"]),
+                        CodigoInterno = Dr["CodigoInterno"].ToString(),
+                        Nome = Dr["Nome"].ToString(),
+                        Descricao = Dr["Descricao"].ToString(),
+                        Valor = Convert.ToDecimal(Dr["Valor"]),
+                        DataRegistro = Convert.ToDateTime(Dr["DataRegistro"]).AddHours(-3),
+                        Quantidade = Convert.ToInt32(Dr["Quantidade"]),
+                        Peso = Convert.ToDouble(Dr["Peso"]),
                         Tamanho = Dr["Tamanho"].ToString()
                     };
                     Lista.Add(item);
@@ -458,6 +504,55 @@ namespace PEV.Data
                 return null;
             }
         }
+
+        public bool SemMensagemEstoque(int Cod)
+        {
+            try
+            {
+                string sSql = "";
+                MySqlCommand cmd = new MySqlCommand();
+                MySqlConnection cn = new MySqlConnection(CConexao.Get_StringConexao());
+                cn.Open();
+
+                sSql = "UPDATE tb_produto SET MensagemEstoque='Não' WHERE CodigoProduto=" + Cod;
+                cmd.CommandText = sSql;
+                cmd.Connection = cn;
+                cmd.ExecuteNonQuery();
+
+                return true;
+            }
+            catch (Exception e)
+            {
+                string msg = e.Message;
+                return false;
+            }
+            return true;
+        }
+
+        public bool ValidaEstoque()
+
+        {
+            try
+            {
+                string sSQL = "";
+                MySqlCommand cmd = new MySqlCommand();
+                MySqlConnection cn = new MySqlConnection(CConexao.Get_StringConexao());
+                cn.Open();
+
+                sSQL = "SELECT * FROM tb_produto WHERE Quantidade < 5  AND MensagemEstoque='Sim'";
+
+                cmd.CommandText = sSQL;
+                cmd.Connection = cn;
+                var Dr = cmd.ExecuteReader();
+                return Dr.HasRows;
+            }
+            catch (Exception e)
+            {
+                string msg = e.Message;
+                return false;
+            }
+        }
+
         public ProdutoModel GetProduto(int CodigoProduto) {
             try
             {
@@ -491,6 +586,7 @@ namespace PEV.Data
                         Quantidade = Convert.ToInt32(Dr["Quantidade"]),
                         Ativo = Dr["Ativo"].ToString(),
                         Tamanho = Dr["Tamanho"].ToString(),
+                        MensagemEstoqueBaixo = Dr["MensagemEstoque"].ToString()
                     };                  
                 }
 
