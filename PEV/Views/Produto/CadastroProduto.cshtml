@@ -51,9 +51,9 @@
             <input type="text" class="form-control" required asp-for="tb_produto.Valor">
         </div>
         @*<div class="col-md-2 form-group">
-                <label asp-for="tb_produto.Peso"></label>
-                <input type="text" class="form-control" asp-for="tb_produto.Peso">
-            </div>*@
+            <label asp-for="tb_produto.Peso"></label>
+            <input type="text" class="form-control" asp-for="tb_produto.Peso">
+        </div>*@
         <div class="col-2 form-group">
             <label asp-for="tb_produto.Quantidade"></label>
             <input type="number" min="0" class="form-control" required asp-for="tb_produto.Quantidade">
@@ -75,10 +75,16 @@
                 <option value="EG">EG</option>
             </select>
         </div>
+        <div class="col-3 form-group">
+            <label asp-for="tb_produto.MensagemEstoqueBaixo"></label>
+            <select type="text" class="form-control" asp-for="tb_produto.MensagemEstoqueBaixo">
+                <option value="Sim">Sim</option>
+                <option value="Não">Não</option>
+            </select>
+        </div>
         <input type="hidden" asp-for="tb_produto.CodigoProduto">
 
         <input type="hidden" asp-for="JsonLTGenero">
-        <!--<input type="hidden" asp-for="JsonLTTamanho">-->
         <input type="hidden" asp-for="JsonLTFoto">
         <input type="hidden" asp-for="JsonLTSubcategoria">
     </div>
@@ -90,7 +96,7 @@
     <div class="row">
         <div class="form-group col-md-4">
             <div class="image-upload text-center">
-                <label for="f_Foto1" class="F1"><i class="fas fa-camera img_icon"></i><div>Selecione a Imagem</div></label>
+                <label for="f_Foto1" class="F1"><i class="fa fa-camera img_icon"></i><div>Selecione a Imagem</div></label>
                 <input id="f_Foto1" type="file" accept="image/*" name="f_Foto1" />
                 <input id="txt_foto" type="hidden" />
             </div>

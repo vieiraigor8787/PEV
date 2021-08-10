@@ -69,6 +69,9 @@ namespace PEV.Models
         [Display(Name = "Tamanho", Prompt = "")]
         public string Tamanho { get; set; }
 
+        [Display(Name = "Avisar quando o estoque está baixo?", Prompt = "")]
+        public string MensagemEstoqueBaixo{ get; set; }
+
         [Display(Name = "Ordem de Exposição", Prompt = "")]
         public int OrdemTamanho { get; set; }
     }

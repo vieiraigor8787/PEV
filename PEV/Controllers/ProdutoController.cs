@@ -32,6 +32,25 @@ namespace PEV.Controllers
             return View(MLista);
         }
 
+        [Authorize(Roles = "A")]
+        public IActionResult EstoqueBaixo()
+        {
+            ProdutoDB Produto = new ProdutoDB();
+            var MLista = Produto.EstoqueBaixo();
+
+            ViewData["NomeLogin"] = CMetodos_Autenticacao.GET_DadosUser(_hCont, CMetodos_Autenticacao.eDadosUser.Nome);
+            ViewData["Tipo"] = CMetodos_Autenticacao.GET_DadosUser(_hCont, CMetodos_Autenticacao.eDadosUser.Tipo);
+
+            return View(MLista);
+        }
+
+        public IActionResult SemMensagemEstoque(int CodigoProduto)
+        {
+            ProdutoDB Prod = new ProdutoDB();
+            Prod.SemMensagemEstoque(CodigoProduto);
+            return RedirectToAction("EstoqueBaixo", "produto");
+        }
+
 
         //public IActionResult Produto(int id)
         //{
@@ -114,11 +133,11 @@ namespace PEV.Controllers
         [Authorize(Roles = "A")]
         public IActionResult Salvar(ProdutoModel obj)
         {
-            string smgvalida = Validar(obj);
-            if (smgvalida != "")
-            {
-                return Json(new { success = false, msg = smgvalida });
-            }
+            //string smgvalida = Validar(obj);
+            //if (smgvalida != "")
+            //{
+            //    return Json(new { success = false, msg = smgvalida });
+            //}
 
             ProdutoDB Prod = new ProdutoDB();
 
