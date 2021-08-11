@@ -2778,6 +2778,7 @@ C:\PEV\PEV\bin\Debug\netcoreapp3.1\runtimes\win\lib\netstandard2.0\System.Net.Ht
 C:\PEV\PEV\bin\Debug\netcoreapp3.1\runtimes\unix\lib\netstandard2.0\System.Private.ServiceModel.dll
 C:\PEV\PEV\bin\Debug\netcoreapp3.1\runtimes\win7\lib\netstandard2.0\System.Private.ServiceModel.dll
 C:\PEV\PEV\bin\Debug\netcoreapp3.1\runtimes\win\lib\netstandard2.0\System.Security.Cryptography.ProtectedData.dll
+C:\PEV\PEV\obj\Debug\netcoreapp3.1\PEV.csproj.AssemblyReference.cache
 C:\PEV\PEV\obj\Debug\netcoreapp3.1\PEV.AssemblyInfoInputs.cache
 C:\PEV\PEV\obj\Debug\netcoreapp3.1\PEV.AssemblyInfo.cs
 C:\PEV\PEV\obj\Debug\netcoreapp3.1\PEV.csproj.CoreCompileInputs.cache
@@ -2796,9 +2797,12 @@ C:\PEV\PEV\obj\Debug\netcoreapp3.1\Razor\Views\Categoria\Index.cshtml.g.cs
 C:\PEV\PEV\obj\Debug\netcoreapp3.1\Razor\Views\Dashboard\Cadastros.cshtml.g.cs
 C:\PEV\PEV\obj\Debug\netcoreapp3.1\Razor\Views\Dashboard\Home.cshtml.g.cs
 C:\PEV\PEV\obj\Debug\netcoreapp3.1\Razor\Views\Dashboard\Index.cshtml.g.cs
+C:\PEV\PEV\obj\Debug\netcoreapp3.1\Razor\Views\Dashboard\Logomarca.cshtml.g.cs
 C:\PEV\PEV\obj\Debug\netcoreapp3.1\Razor\Views\Estatico\Historia.cshtml.g.cs
 C:\PEV\PEV\obj\Debug\netcoreapp3.1\Razor\Views\Estatico\Politica.cshtml.g.cs
 C:\PEV\PEV\obj\Debug\netcoreapp3.1\Razor\Views\Estatico\Termo.cshtml.g.cs
+C:\PEV\PEV\obj\Debug\netcoreapp3.1\Razor\Views\Frete\CadastroFreteDados.cshtml.g.cs
+C:\PEV\PEV\obj\Debug\netcoreapp3.1\Razor\Views\Frete\Index.cshtml.g.cs
 C:\PEV\PEV\obj\Debug\netcoreapp3.1\Razor\Views\Genero\CadastroGenero.cshtml.g.cs
 C:\PEV\PEV\obj\Debug\netcoreapp3.1\Razor\Views\Genero\Index.cshtml.g.cs
 C:\PEV\PEV\obj\Debug\netcoreapp3.1\Razor\Views\Home\Busca.cshtml.g.cs
@@ -2819,6 +2823,8 @@ C:\PEV\PEV\obj\Debug\netcoreapp3.1\Razor\Views\Menu\CadastroEndereco.cshtml.g.cs
 C:\PEV\PEV\obj\Debug\netcoreapp3.1\Razor\Views\Menu\Endereco.cshtml.g.cs
 C:\PEV\PEV\obj\Debug\netcoreapp3.1\Razor\Views\Menu\MeusDados.cshtml.g.cs
 C:\PEV\PEV\obj\Debug\netcoreapp3.1\Razor\Views\Menu\MeusPedidos.cshtml.g.cs
+C:\PEV\PEV\obj\Debug\netcoreapp3.1\Razor\Views\Pagamento\CadastroPagamentoDados.cshtml.g.cs
+C:\PEV\PEV\obj\Debug\netcoreapp3.1\Razor\Views\Pagamento\Index.cshtml.g.cs
 C:\PEV\PEV\obj\Debug\netcoreapp3.1\Razor\Views\Pedido\EditarStatus.cshtml.g.cs
 C:\PEV\PEV\obj\Debug\netcoreapp3.1\Razor\Views\Pedido\Index.cshtml.g.cs
 C:\PEV\PEV\obj\Debug\netcoreapp3.1\Razor\Views\Pedido\ItensPedido.cshtml.g.cs
@@ -2829,6 +2835,7 @@ C:\PEV\PEV\obj\Debug\netcoreapp3.1\Razor\Views\Produto\Index.cshtml.g.cs
 C:\PEV\PEV\obj\Debug\netcoreapp3.1\Razor\Views\Shared\Components\Busca\Default.cshtml.g.cs
 C:\PEV\PEV\obj\Debug\netcoreapp3.1\Razor\Views\Shared\Components\Categorias\Default.cshtml.g.cs
 C:\PEV\PEV\obj\Debug\netcoreapp3.1\Razor\Views\Shared\Components\EstoqueBaixo\Default.cshtml.g.cs
+C:\PEV\PEV\obj\Debug\netcoreapp3.1\Razor\Views\Shared\Components\Logo\Default.cshtml.g.cs
 C:\PEV\PEV\obj\Debug\netcoreapp3.1\Razor\Views\Shared\Components\Subcategorias\Default.cshtml.g.cs
 C:\PEV\PEV\obj\Debug\netcoreapp3.1\Razor\Views\Shared\Components\TodasCategorias\Default.cshtml.g.cs
 C:\PEV\PEV\obj\Debug\netcoreapp3.1\Razor\Views\Shared\Error.cshtml.g.cs
@@ -2859,5 +2866,3 @@ C:\PEV\PEV\obj\Debug\netcoreapp3.1\PEV.csproj.CopyComplete
 C:\PEV\PEV\obj\Debug\netcoreapp3.1\PEV.dll
 C:\PEV\PEV\obj\Debug\netcoreapp3.1\PEV.pdb
 C:\PEV\PEV\obj\Debug\netcoreapp3.1\PEV.genruntimeconfig.cache
-C:\PEV\PEV\obj\Debug\netcoreapp3.1\PEV.csproj.AssemblyReference.cache
-C:\PEV\PEV\obj\Debug\netcoreapp3.1\Razor\Views\Dashboard\Logomarca.cshtml.g.cs

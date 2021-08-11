@@ -5,17 +5,18 @@
 
 @if (Model == true)
 {
-    <div class="row col-md-12">
-        <div id="Mensagem" class="alert alert-danger text-left border-0" role='alert'><a asp-controller="Produto" asp-action="EstoqueBaixo">Atenção! Existe Produtos com Estoque Baixo. Clique para ver quais são!</a></div>
-        <div id="Fx" class="alert alert-danger border-0" onclick="Fechar();"><a href="#">Fechar X</a></div>
-    </div>
+    <div class="col-sm-12 mb-6 no-padding">
+        <div class="row col-sm-12 mb-6">
+            <div id="Mensagem" class="alert alert-danger text-left border-0 col-sm-10" role='alert'><a asp-controller="Produto" asp-action="EstoqueBaixo">Atenção! Existe Produtos com Estoque Baixo. Clique para ver quais são!</a></div>
+            <div id="Fx" class="alert alert-danger border-0 col-sm-2" onclick="Fechar();"><a href="#">Fechar X</a></div>
+        </div>
+</div>
 
+        }
 
-}
-
-<script>
-    function Fechar() {
-        $("#Mensagem").hide();
-        $("#Fx").hide();
-    }
-</script>
+        <script>
+            function Fechar() {
+                $("#Mensagem").hide();
+                $("#Fx").hide();
+            }
+        </script>

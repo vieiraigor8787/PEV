@@ -8,6 +8,8 @@ using PEV.Models;
 using Microsoft.AspNetCore.Http;
 using PEV.Classes;
 using Microsoft.AspNetCore.Authorization;
+using System.IO;
+using Microsoft.AspNetCore.Hosting;
 
 namespace PEV.Controllers
 {
@@ -15,10 +17,14 @@ namespace PEV.Controllers
     {
 
         private readonly IHttpContextAccessor _hCont;
+        private readonly IHostingEnvironment hostingEnvironment;
+        IWebHostEnvironment _appEnvironment;
 
-        public DashboardController(IHttpContextAccessor httpContextAccessor)
+        public DashboardController(IHttpContextAccessor httpContextAccessor, IHostingEnvironment environment, IWebHostEnvironment env)
         {
             _hCont = httpContextAccessor;
+            hostingEnvironment = environment;
+            _appEnvironment = env;
         }
 
         [Authorize(Roles = "A")]
@@ -83,6 +89,22 @@ namespace PEV.Controllers
             return View(MLista);
         }
 
+        public IActionResult Video()
+        {
+            string pasta = "imagens";
+            string caminho_WebRoot = _appEnvironment.WebRootPath;
+
+            string caminhoVideos = Path.Combine(caminho_WebRoot, pasta);
+
+            string[] arquivosVideos = Directory.GetFiles(caminhoVideos)
+                                               .Select(Path.GetFileName)
+                                               .ToArray();
+
+            List<string> listaVideos = new List<string>(arquivosVideos);
+            return View(listaVideos);
+
+        }
+
 
         [Authorize(Roles = "A")]
         public IActionResult Cadastros()
@@ -93,58 +115,64 @@ namespace PEV.Controllers
         [Authorize(Roles = "A")]
         public IActionResult Logomarca()
         {
-            ViewData["Valida"] = "";
-            return View();
+            string pasta = "imagens";
+            string caminho_WebRoot = _appEnvironment.WebRootPath;
+
+            string caminhoVideos = Path.Combine(caminho_WebRoot, pasta);
+
+            string[] arquivosVideos = Directory.GetFiles(caminhoVideos)
+                                               .Select(Path.GetFileName)
+                                               .ToArray();
+
+            List<string> listaVideos = new List<string>(arquivosVideos);
+            return View(listaVideos);
         }
 
-        [Authorize(Roles = "A")]
-        public IActionResult SalvarLogo(LogomarcaModel obj)
+        public IActionResult FotoSelecionada(string Nome)
         {
-            //string smgvalida = Validar(obj);
-            //if (smgvalida != "")
-            //{
-            //    return Json(new { success = false, msg = smgvalida });
-            //}
+            LogoDB Img = new LogoDB();
 
-            LogoDB Log = new LogoDB();
-
-
-            if (Log.InserirLogo(obj))
+            if (Img.InserirLogo(Nome))
             {
-                return Json(new { success = true, msg = "Produto Cadastrado com Sucesso!" });
+                    ViewData["Valida"] = "<div class='alert alert-success text-center' role='alert'>Genero inserido com sucesso!</div>";
             }
             else
             {
                 return Json(new { success = false, msg = "Erro ao Cadastrar!" });
             }
-
-
-            //else
-            //{
-            //    if (Prod.UpdateDados(obj))
-            //    {
-            //        return Json(new { success = true, msg = "Produto Atualizado com Sucesso!" });
-            //    }
-            //    else if (Prod.ValidarTamanho(obj))
-            //    {
-
-            //        if (Prod.UpdateDados(obj))
-            //        {
-            //            return Json(new { success = true, msg = "Produto Atualizado com Sucesso!" });
-            //        }
-            //        else
-            //        {
-            //            return Json(new { success = false, msg = "Erro ao Cadastrar!" });
-            //        }
-            //    }
-            //    else
-            //    {
-            //        return Json(new { success = false, msg = "Erro ao Cadastrar!" });
-            //    }
-            //}
-
-            return Json(new { success = false, msg = "Erro ao Cadastrar!" });
+            
+            return View("Logomarca");
         }
+
+        [HttpPost]
+        public async Task<IActionResult> UploadFiles(List<IFormFile> files)
+        {
+            long size = files.Sum(f => f.Length);
+
+            // full path to file in temp location
+            var filePath = Path.GetTempFileName();
+
+            foreach (var formFile in files)
+            {
+                var uploads = Path.Combine(hostingEnvironment.WebRootPath, "imagens");
+                var fullPath = Path.Combine(uploads, GetUniqueFileName(formFile.FileName));
+                formFile.CopyTo(new FileStream(fullPath, FileMode.Create));
+
+
+            }
+            return RedirectToAction("Logomarca", "Dashboard");
+            //return Ok(new { count = files.Count, size, filePath });
+        }
+        private string GetUniqueFileName(string fileName)
+        {
+            fileName = Path.GetFileName(fileName);
+            return Path.GetFileNameWithoutExtension(fileName)
+                      + "_"
+                      + Guid.NewGuid().ToString().Substring(0, 4)
+                      + Path.GetExtension(fileName);
+        }
+
+
 
         [Authorize(Roles = "A")]
         public IActionResult Home()

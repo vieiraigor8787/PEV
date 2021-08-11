@@ -1,0 +1,26 @@
+﻿
+@{
+                @model tb_frete_dados;
+                ViewData["Title"] = "Cadastro de Cep";
+
+                Layout = "_Layout_dashboard"; 
+    }
+
+<hr />
+<h4 class="font-weight-bold">Cadastro de CEP Origem</h4>
+<hr />
+<form asp-action="Salvar" asp-controller="Frete">
+    <div class="form-group">
+        <label asp-for="CEP"></label>
+        <input type="text" class="form-control" asp-for="CEP">
+        <input type="hidden" asp-for="IdFrete">
+    </div>
+
+    @Html.Raw(ViewData["Valida"])
+
+    <button type="submit" class="btn btn-primary">Registrar</button>
+
+</form>
+<br />
+
+<button type="button" class="btn btn-info btn-sm" onclick="window.location.href='/Frete'">Voltar</button>

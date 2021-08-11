@@ -11,7 +11,7 @@ namespace PEV.Data
 {
     public class LogoDB
     {
-        public bool InserirLogo(LogomarcaModel obj)
+        public bool InserirLogo(string logo)
         {
             try
             {
@@ -20,20 +20,9 @@ namespace PEV.Data
                 MySqlConnection cn = new MySqlConnection(CConexao.Get_StringConexao());
                 cn.Open();
 
-                var settings = new JsonSerializerSettings
-                {
-                    NullValueHandling = NullValueHandling.Ignore,
-                    MissingMemberHandling = MissingMemberHandling.Ignore,
-                    Culture = new System.Globalization.CultureInfo("pt-BR")
-                };
-
-                obj.JsonLTLogomarca = obj.JsonLTLogomarca.Replace("Descricao", "Caminho");
-
-                var prodFotos = JsonConvert.DeserializeObject<LogomarcaModel>(obj.JsonLTLogomarca, settings);
-
                 cmd.Connection = cn;
-                sSQL = "insert into  tb_logomarca (Caminho)values(@Caminho)";
-                cmd.Parameters.AddWithValue("@Caminho", prodFotos.Caminho);
+                sSQL = "TRUNCATE TABLE tb_logomarca; insert into  tb_logomarca (Nome)values(@Nome)";
+                cmd.Parameters.AddWithValue("@Nome", logo);
                 cmd.CommandText = sSQL;
                 cmd.ExecuteNonQuery();
 
@@ -46,59 +35,38 @@ namespace PEV.Data
             }
         }
 
-        public bool UpDateDados(tb_genero obj)
+        public List<tb_logomarca> LogoMarca()
         {
+            try
             {
-                try
+                string sSQL = "";
+                MySqlCommand cmd = new MySqlCommand();
+                MySqlConnection cn = new MySqlConnection(CConexao.Get_StringConexao());
+                cn.Open();
+
+                sSQL = "select * from tb_logomarca";
+
+                cmd.CommandText = sSQL;
+                cmd.Connection = cn;
+                var Dr = cmd.ExecuteReader();
+
+                var Lista = new List<tb_logomarca>();
+
+                while (Dr.Read())
                 {
-                    string sSQL = "";
-                    MySqlCommand cmd = new MySqlCommand();
-                    MySqlConnection cn = new MySqlConnection(CConexao.Get_StringConexao());
-                    cn.Open();
-
-                    sSQL = "update tb_genero set descricao=@descricao where codigogenero=@codigogenero";
-                    cmd.Parameters.AddWithValue("@descricao", obj.Descricao);
-                    cmd.Parameters.AddWithValue("@codigogenero", obj.CodigoGenero);
-
-                    cmd.CommandText = sSQL;
-                    cmd.Connection = cn;
-                    cmd.ExecuteNonQuery();
-
-                    return true;
+                    var item = new tb_logomarca
+                    {
+                        Nome = Dr["Nome"].ToString()
+                    };
+                    Lista.Add(item);
                 }
-                catch (Exception e)
-                {
-                    string msg = e.Message;
-                    return false;
-                }
+
+                return Lista;
             }
-
-        }
-
-        public bool ExcluirDados(int Codigo)
-        {
+            catch (Exception e)
             {
-                try
-                {
-                    string sSQL = "";
-                    MySqlCommand cmd = new MySqlCommand();
-                    MySqlConnection cn = new MySqlConnection(CConexao.Get_StringConexao());
-                    cn.Open();
-
-                    sSQL = "delete from tb_genero  where codigogenero=@codigogenero";
-                    cmd.Parameters.AddWithValue("@codigogenero", Codigo);
-
-                    cmd.CommandText = sSQL;
-                    cmd.Connection = cn;
-                    cmd.ExecuteNonQuery();
-
-                    return true;
-                }
-                catch (Exception e)
-                {
-                    string msg = e.Message;
-                    return false;
-                }
+                string msg = e.Message;
+                return null;
             }
         }
     }
