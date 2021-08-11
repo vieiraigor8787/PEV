@@ -65,12 +65,12 @@ namespace PEV.Controllers
        // [Authorize(Roles = "A")]
         public IActionResult Salvar(tb_genero obj)
         {
-            string smgvalida = Validar(obj);
-            if(smgvalida != "")
-            {
-                ViewData["Valida"] = smgvalida;
-                return View("CadastroGenero");
-            }
+            //string smgvalida = Validar(obj);
+            //if(smgvalida != "")
+            //{
+            //    ViewData["Valida"] = smgvalida;
+            //    return View("CadastroGenero");
+            //}
 
             GeneroDB Genero = new GeneroDB();
 

@@ -174,8 +174,11 @@ namespace PEV.Controllers
             }
             else
             {
-                var email = "eccestilo@gmail.com";
-                var token = "21cad8a1-ea46-4fd3-9033-4da0e2f3b8e2520042e44d5da2bde3c350207fd55b9150fb-1682-4184-987c-c7ecbafe4ca7";
+
+                PagamentoDB Pg = new PagamentoDB();
+
+                var email = Pg.PagamentoDados().Email;
+                var token = Pg.PagamentoDados().Token; 
                 var PagSeg = new CPagSeguro(email, token, CPagSeguro.eAmbiente.Producao);
 
                 var resp = await PagSeg.GetSessaoAsync();
@@ -280,8 +283,8 @@ namespace PEV.Controllers
 
             //Conjunto de parâmetros/formData.
             System.Collections.Specialized.NameValueCollection postData = new System.Collections.Specialized.NameValueCollection();
-            postData.Add("email", "danieltoguti@gmail.com");
-            postData.Add("token", "2cd2eb37-563a-4360-9483-2a2f272aed6d0489e06b44a08cb92fd03926cf2f2be4b5bd-47f0-4d83-951f-a6094f300510");
+            postData.Add("email", "");
+            postData.Add("token", "");
             postData.Add("currency", "BRL");
             postData.Add("itemId1", "0001");
             postData.Add("itemDescription1", "ProdutoPagSeguroI");

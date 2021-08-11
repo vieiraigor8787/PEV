@@ -1,0 +1,16 @@
+﻿
+@model List<tb_logomarca>;
+
+
+@if (Model.Count > 0)
+{
+    @foreach (var item in Model)
+    {
+<div>
+    <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">
+        <img src="~/imagens/@item.Nome" style="max-width:200px; width:auto;max-height:200px; height:auto;" alt="">
+    </a>
+</div>
+    }
+}
+

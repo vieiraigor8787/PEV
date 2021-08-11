@@ -1,0 +1,28 @@
+﻿
+@{
+                @model tb_pagamento_dados;
+                ViewData["Title"] = "Cadastro de Pagamento";
+
+                Layout = "_Layout_dashboard"; 
+    }
+
+<hr />
+<h4 class="font-weight-bold">Cadastro de PagSeguro</h4>
+<hr />
+<form asp-action="Salvar" asp-controller="Pagamento">
+    <div class="form-group">
+        <label asp-for="Email"></label>
+        <input type="email" class="form-control" asp-for="Email">
+        <label asp-for="Token"></label>
+        <input type="text" class="form-control" asp-for="Token">
+        <input type="hidden" asp-for="IdPagamento">
+    </div>
+
+    @Html.Raw(ViewData["Valida"])
+
+    <button type="submit" class="btn btn-primary">Registrar</button>
+
+</form>
+<br />
+
+<button type="button" class="btn btn-info btn-sm" onclick="window.location.href='/Pagamento'">Voltar</button>

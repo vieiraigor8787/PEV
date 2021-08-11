@@ -1,0 +1,41 @@
+﻿@{
+                @model tb_frete_dados;
+                ViewData["Title"] = "Dados de Pagamento";
+
+                Layout = "_Layout_dashboard"; }
+
+<h5>Cep do local da Postagem</h5>
+<hr />
+
+<div class="content mt-3">
+    <div class="animated fadeIn">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    @*<div class="card-header row">
+                        <div class="col-md-8"><strong class="card-title">Dados do PagSeguro</strong></div>
+                        <div class=" col-md-2"><button class="btn btn-primary" type="button" onclick="window.location.href ='/frete/cadastrofretedados'">Novo Dados PagSeguro</button></div>
+                    </div>*@
+                    <div class="card-body">
+                        <table id="bootstrap-data-table-export" class="table table-striped table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>Código</th>
+                                    <th>CEP</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                        <tr>
+                                            <td>@Model.IdFrete</td>
+                                            <td>@Model.CEP</td>
+                                            <td><button type="button" class="btn btn-warning btn-sm" onclick="window.location.href='/frete/editar?IdFrete=@Model.IdFrete&Email=@Model.CEP'"><i class="fa fa-edit"></i></button></td>
+                                            <td><button type="button" class="btn btn-danger btn-sm" onclick="window.location.href='/frete/excluir?IdFrete=@Model.IdFrete'"><i class="fa fa-trash"></i></button></td>
+                                        </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div><!-- .animated -->
+</div><!-- .content -->
