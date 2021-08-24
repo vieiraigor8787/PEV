@@ -2795,7 +2795,7 @@ C:\PEV\PEV\obj\Debug\netcoreapp3.1\PEV.RazorCoreGenerate.cache
 C:\PEV\PEV\obj\Debug\netcoreapp3.1\Razor\Views\Categoria\CadastroCategoria.cshtml.g.cs
 C:\PEV\PEV\obj\Debug\netcoreapp3.1\Razor\Views\Categoria\Index.cshtml.g.cs
 C:\PEV\PEV\obj\Debug\netcoreapp3.1\Razor\Views\Dashboard\Cadastros.cshtml.g.cs
-C:\PEV\PEV\obj\Debug\netcoreapp3.1\Razor\Views\Dashboard\Home.cshtml.g.cs
+C:\PEV\PEV\obj\Debug\netcoreapp3.1\Razor\Views\Dashboard\Historia.cshtml.g.cs
 C:\PEV\PEV\obj\Debug\netcoreapp3.1\Razor\Views\Dashboard\Index.cshtml.g.cs
 C:\PEV\PEV\obj\Debug\netcoreapp3.1\Razor\Views\Dashboard\Logomarca.cshtml.g.cs
 C:\PEV\PEV\obj\Debug\netcoreapp3.1\Razor\Views\Estatico\Historia.cshtml.g.cs
@@ -2813,6 +2813,7 @@ C:\PEV\PEV\obj\Debug\netcoreapp3.1\Razor\Views\Home\Finalizar.cshtml.g.cs
 C:\PEV\PEV\obj\Debug\netcoreapp3.1\Razor\Views\Home\Index.cshtml.g.cs
 C:\PEV\PEV\obj\Debug\netcoreapp3.1\Razor\Views\Home\Infantil.cshtml.g.cs
 C:\PEV\PEV\obj\Debug\netcoreapp3.1\Razor\Views\Home\Masculino.cshtml.g.cs
+C:\PEV\PEV\obj\Debug\netcoreapp3.1\Razor\Views\Home\Painel.cshtml.g.cs
 C:\PEV\PEV\obj\Debug\netcoreapp3.1\Razor\Views\Home\PedidoConcluido.cshtml.g.cs
 C:\PEV\PEV\obj\Debug\netcoreapp3.1\Razor\Views\Home\Procura.cshtml.g.cs
 C:\PEV\PEV\obj\Debug\netcoreapp3.1\Razor\Views\Home\ProdutoDetail.cshtml.g.cs

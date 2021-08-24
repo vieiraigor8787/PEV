@@ -179,7 +179,7 @@ namespace PEV.Controllers
 
                 var email = Pg.PagamentoDados().Email;
                 var token = Pg.PagamentoDados().Token; 
-                var PagSeg = new CPagSeguro(email, token, CPagSeguro.eAmbiente.Producao);
+                var PagSeg = new CPagSeguro(email, token, CPagSeguro.eAmbiente.SandBox);
 
                 var resp = await PagSeg.GetSessaoAsync();
                 ViewData["JsBPG"] = PagSeg.GetBiblioTecaJS();
@@ -278,13 +278,18 @@ namespace PEV.Controllers
         [HttpPost]
         public JsonResult Checkout(FinalizarPedidoVM obj)
         {
+
+            PagamentoDB Pg = new PagamentoDB();
+
+            var email = Pg.PagamentoDados().Email;
+            var token = Pg.PagamentoDados().Token;
             //URI de checkout.
             string uri = @"https://ws.pagseguro.uol.com.br/v2/checkout";
 
             //Conjunto de parâmetros/formData.
             System.Collections.Specialized.NameValueCollection postData = new System.Collections.Specialized.NameValueCollection();
-            postData.Add("email", "");
-            postData.Add("token", "");
+            postData.Add("email", email);
+            postData.Add("token", token);
             postData.Add("currency", "BRL");
             postData.Add("itemId1", "0001");
             postData.Add("itemDescription1", "ProdutoPagSeguroI");

@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - ECCE</title>
+    <title>@ViewData["Title"]</title>
     <link rel="shortcut icon" href="favicon.ico">
 
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
@@ -194,7 +194,7 @@
                             @if (ViewData["Tipo"].ToString() == "A")
                             {
                                 <li class="nav-item">
-                                    <a class="nav-link" asp-area="" asp-controller="DashBoard" asp-action="Home">Dahsboard</a>
+                                    <button type="button" class="btn btn-success btn-sm"><a  asp-controller="DashBoard" asp-action="index" style="color:white;">Painel de Controle</a></button>
                                 </li>
                             }
 

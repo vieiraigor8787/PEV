@@ -73,6 +73,7 @@ namespace PEV.Classes
                 catch (Exception e)
                 {
                     string err = e.Message;
+                return "Erro Inesperado. Tente Novamente!";
                 }
                 return "";
             }

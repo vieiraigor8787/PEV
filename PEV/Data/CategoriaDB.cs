@@ -149,7 +149,16 @@ namespace PEV.Data
             catch (Exception e)
             {
                 string msg = e.Message;
-                return null;
+                var Lista = new List<tb_categoria>();
+
+                    var item = new tb_categoria
+                    {
+                        CodigoCategoria = 0,
+                        Descricao = "",
+                    };
+
+                    Lista.Add(item);
+                return Lista;
             }
         }
 
@@ -189,7 +198,16 @@ namespace PEV.Data
             catch (Exception e)
             {
                 string msg = e.Message;
-                return null;
+                var Lista = new List<tb_categoria>();
+
+                var item = new tb_categoria
+                {
+                    Nome = ""
+                    };
+
+                    Lista.Add(item);
+
+                return Lista;
             }
         }
 

@@ -51,48 +51,6 @@ namespace PEV.Controllers
             return RedirectToAction("EstoqueBaixo", "produto");
         }
 
-
-        //public IActionResult Produto(int id)
-        //{
-        //    ProdutoDB Produto = new ProdutoDB();
-        //    var resp = Produto.GetProdutoView(id);
-
-        //    ViewData["NomeLogin"] = CMetodos_Autenticacao.GET_DadosUser(_hCont, CMetodos_Autenticacao.eDadosUser.Nome);
-        //    ViewData["Tipo"] = CMetodos_Autenticacao.GET_DadosUser(_hCont, CMetodos_Autenticacao.eDadosUser.Tipo);
-
-        //    var cookie = new CookieController();
-        //    ViewData["Carrinho"] = cookie.GetAll();
-
-        //    return View(resp);
-        //}
-
-        //public string GetAll()
-        //{
-        //    string Carrinho = "<table>";
-        //    foreach (var item in Request.Cookies)
-        //    {
-        //        Carrinho += "<tr>";
-        //        Carrinho += "<td>" + item.Key + "</td>";
-        //        Carrinho += "<td>" + item.Value + "</td>";
-        //        Carrinho += "<td><a href='##' onclick='RemoveItem(" + item.Key + ");'>Excluir</a></td>";
-        //        Carrinho += "</tr>";
-        //    }
-        //    Carrinho += "</table>";
-        //    return Carrinho;
-        //}
-
-        //[HttpGet]
-        //public void RemoveItem(string key)
-        //{
-        //    Response.Cookies.Delete(key);
-        //}
-
-        //[HttpGet] //AQUIE SE QUISER UM ITEM ESPECÍFICO 
-        //public string Get(string key)
-        //{
-        //    return Request.Cookies[key];
-        //}
-
         [Authorize(Roles = "A")]
         public IActionResult CadastroProduto()
         {

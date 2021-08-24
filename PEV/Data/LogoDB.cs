@@ -66,7 +66,13 @@ namespace PEV.Data
             catch (Exception e)
             {
                 string msg = e.Message;
-                return null;
+                var Lista = new List<tb_logomarca>();
+                var item = new tb_logomarca
+                {
+                    Nome = "sua_logo_aqui_b83d.jpg"
+                };
+                Lista.Add(item);
+                return Lista;
             }
         }
     }

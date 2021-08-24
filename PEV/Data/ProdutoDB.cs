@@ -31,11 +31,11 @@ namespace PEV.Data
                 };
                 
                 obj.JsonLTFoto = obj.JsonLTFoto.Replace("Descricao", "Caminho");
-                obj.JsonLTGenero = obj.JsonLTGenero.Replace("Codigo", "CodigoGenero");
+                //obj.JsonLTGenero = obj.JsonLTGenero.Replace("Codigo", "CodigoGenero");
                 obj.JsonLTSubcategoria = obj.JsonLTSubcategoria.Replace("Codigo", "CodigoSubcategoria");
 
                 var prodFotos = JsonConvert.DeserializeObject<List<tb_produto_foto>>(obj.JsonLTFoto, settings);
-                var proGeneros = JsonConvert.DeserializeObject<List<tb_produto_genero>>(obj.JsonLTGenero, settings);
+                //var proGeneros = JsonConvert.DeserializeObject<List<tb_produto_genero>>(obj.JsonLTGenero, settings);
                 var proSubcategoria = JsonConvert.DeserializeObject<List<tb_produto_subcategoria>>(obj.JsonLTSubcategoria, settings);
 
                 sSQL = "insert into tb_produto (CodigoInterno, Nome, Descricao, valor, dataregistro, peso, quantidade, ativo, tamanho, MensagemEstoque)values(@codigointerno, @nome, @descricao, @valor, Now(), @peso, @quantidade, @ativo, @tamanho, @MensagemEstoque)";
@@ -84,23 +84,23 @@ namespace PEV.Data
                     string Coluna = "";
                     int Codigo = 0;
 
-                    //Generos                    
-                    foreach (var item in proGeneros)
-                    {
-                        Tabela = "tb_produto_genero";
-                        Coluna = "CodigoGenero";
-                        Codigo = item.CodigoGenero;
+                    ////Generos                    
+                    //foreach (var item in proGeneros)
+                    //{
+                    //    Tabela = "tb_produto_genero";
+                    //    Coluna = "CodigoGenero";
+                    //    Codigo = item.CodigoGenero;
 
-                        cmd.Parameters.Clear();
-                        cmd.Connection = cn;
-                        sSQL = "insert into  " + Tabela + " (" + Coluna + ",CodigoProduto)values(@Codigo,@CodigoProduto)";
-                        cmd.Parameters.AddWithValue("@CodigoProduto", CodigoProduto);
-                        cmd.Parameters.AddWithValue("@Codigo", Codigo);
-                        cmd.CommandText = sSQL;
-                        cmd.ExecuteNonQuery();
-                    }
+                    //    cmd.Parameters.Clear();
+                    //    cmd.Connection = cn;
+                    //    sSQL = "insert into  " + Tabela + " (" + Coluna + ",CodigoProduto)values(@Codigo,@CodigoProduto)";
+                    //    cmd.Parameters.AddWithValue("@CodigoProduto", CodigoProduto);
+                    //    cmd.Parameters.AddWithValue("@Codigo", Codigo);
+                    //    cmd.CommandText = sSQL;
+                    //    cmd.ExecuteNonQuery();
+                    //}
 
-                    //Categorias                   
+                    //SubCategorias                   
                     foreach (var item in proSubcategoria)
                     {
                         Codigo = item.CodigoSubCategoria;
@@ -140,11 +140,11 @@ namespace PEV.Data
                 };
 
                 obj.JsonLTFoto = obj.JsonLTFoto.Replace("Descricao", "Caminho");
-                obj.JsonLTGenero = obj.JsonLTGenero.Replace("Codigo", "CodigoGenero");
+                //obj.JsonLTGenero = obj.JsonLTGenero.Replace("Codigo", "CodigoGenero");
                 obj.JsonLTSubcategoria = obj.JsonLTSubcategoria.Replace("Codigo", "CodigoSubcategoria");
 
                 var prodFotos = JsonConvert.DeserializeObject<List<tb_produto_foto>>(obj.JsonLTFoto, settings);
-                var proGeneros = JsonConvert.DeserializeObject<List<tb_produto_genero>>(obj.JsonLTGenero, settings);
+                //var proGeneros = JsonConvert.DeserializeObject<List<tb_produto_genero>>(obj.JsonLTGenero, settings);
                 var proSubcategoria = JsonConvert.DeserializeObject<List<tb_produto_subcategoria>>(obj.JsonLTSubcategoria, settings);
 
                 sSQL = " update tb_produto set CodigoInterno=@codigointerno, Nome=@nome, Descricao=@descricao, valor=@valor, peso=@peso, quantidade=@quantidade, ativo=@ativo," +
@@ -189,22 +189,22 @@ namespace PEV.Data
                     int Codigo = 0;
 
                     //Generos                    
-                    foreach (var item in proGeneros)
-                    {
-                        Tabela = "tb_produto_genero";
-                        Coluna = "CodigoGenero";
-                        Codigo = item.CodigoGenero;
+                    //foreach (var item in proGeneros)
+                    //{
+                    //    Tabela = "tb_produto_genero";
+                    //    Coluna = "CodigoGenero";
+                    //    Codigo = item.CodigoGenero;
 
-                        cmd.Parameters.Clear();
-                        cmd.Connection = cn;
-                        sSQL = "insert into  " + Tabela + " (" + Coluna + ",CodigoProduto)values(@Codigo,@CodigoProduto)";
-                        cmd.Parameters.AddWithValue("@CodigoProduto", obj.tb_produto.CodigoProduto);
-                        cmd.Parameters.AddWithValue("@Codigo", Codigo);
-                        cmd.CommandText = sSQL;
-                        cmd.ExecuteNonQuery();
-                    }
+                    //    cmd.Parameters.Clear();
+                    //    cmd.Connection = cn;
+                    //    sSQL = "insert into  " + Tabela + " (" + Coluna + ",CodigoProduto)values(@Codigo,@CodigoProduto)";
+                    //    cmd.Parameters.AddWithValue("@CodigoProduto", obj.tb_produto.CodigoProduto);
+                    //    cmd.Parameters.AddWithValue("@Codigo", Codigo);
+                    //    cmd.CommandText = sSQL;
+                    //    cmd.ExecuteNonQuery();
+                    //}
 
-                    //Categorias                   
+                    //Subcategorias                   
                     foreach (var item in proSubcategoria) 
                     {
                         Codigo = item.CodigoSubCategoria;

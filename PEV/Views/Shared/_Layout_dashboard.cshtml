@@ -49,7 +49,7 @@
                     <li class="active">
                         <a asp-area="" asp-controller="Dashboard" asp-action="index">
                             <i class="fa fa-dashboard"></i>
-                            <span class="menu-text">Dashboard</span>
+                            <span class="menu-text">Painel de Controle</span>
                         </a>
                     </li>
                     <li>
@@ -59,36 +59,17 @@
                         </a>
                     </li>
                     <li>
-                        <a asp-area="" asp-controller="Dashboard" asp-action="Home">
-                            <i class="fa fa-list"></i>
-                            <span class="menu-text">Home</span>
-                        </a>
-                    </li>
-                    <li>
                         <a asp-area="" asp-controller="Dashboard" asp-action="Cadastros">
-                            <i class="fa fa-list"></i>
+                            <i class="fa fa-table"></i>
                             <span class="menu-text">Cadastros</span>
                         </a>
                     </li>
                     <li>
-                        <a asp-area="" asp-controller="Frete" asp-action="index">
-                            <i class="fa fa-list"></i>
-                            <span class="menu-text">Frete</span>
+                        <a asp-area="" asp-controller="Usuario" asp-action="index">
+                            <i class="fa fa-briefcase"></i>
+                            <span class="menu-text">Administradores</span>
                         </a>
                     </li>
-                    <li>
-                        <a asp-area="" asp-controller="Pagamento" asp-action="index">
-                            <i class="fa fa-list"></i>
-                            <span class="menu-text">PagSeguro</span>
-                        </a>
-                    </li>
-
-                    @* <li>
-            <a asp-area="" asp-controller="Usuario" asp-action="index">
-                <i class="fa fa-briefcase"></i>
-                <span class="menu-text">Colaborador</span>
-            </a>
-        </li> *@
                     <li>
                         <a asp-area="" asp-controller="Usuario" asp-action="Cliente">
                             <i class="fa fa-users"></i>
@@ -101,9 +82,8 @@
                             <i class="fa fa-arrow-circle-right"></i>
                         </a>
                     </li>
-                    <h3 class="menu-title">Estrutura do site</h3><!-- /.menu-title -->
                     <li class="menu-item-has-children dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-check-square-o"></i>Produtos</a>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-product-hunt"></i>Produtos</a>
                         <ul class="sub-menu children dropdown-menu">
                             <li><i class="fa fa-bars"></i><a asp-controller="Produto" asp-action="Index">Lista de produtos</a></li>
                             <li><i class="fa fa-table"></i><a asp-controller="Produto" asp-action="CadastroProduto">Cadastrar produto</a></li>
@@ -111,22 +91,20 @@
                         </ul>
                     </li>
                     <li class="menu-item-has-children dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-check-square-o"></i>Categorias</a>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-list-alt"></i>Categorias</a>
                         <ul class="sub-menu children dropdown-menu">
                             <li><i class="fa fa-bars"></i><a asp-controller="Categoria" asp-action="Index">Lista de categorias</a></li>
                             <li><i class="fa fa-table"></i><a asp-controller="Categoria" asp-action="CadastroCategoria">Cadastrar categoria</a></li>
-                            @*<li><i class="fa fa-times"></i><a href="">Remover categoria</a></li>*@
                         </ul>
                     </li>
                     <li class="menu-item-has-children dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-check-square-o"></i>Subcategorias</a>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-list-alt"></i>Subcategorias</a>
                         <ul class="sub-menu children dropdown-menu">
                             <li><i class="fa fa-bars"></i><a asp-controller="SubCategoria" asp-action="Index">Lista de Subcategorias</a></li>
                             <li><i class="fa fa-table"></i><a asp-controller="SubCategoria" asp-action="CadastroSubCategoria">Cadastrar Subcategoria</a></li>
-                            @*<li><i class="fa fa-times"></i><a href="">Remover categoria</a></li>*@
                         </ul>
                     </li>
-                    <li class="menu-item-has-children dropdown">
+                    @*<li class="menu-item-has-children dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-th"></i>Características</a>
                         <ul class="sub-menu children dropdown-menu">
                             <li><i class="menu-icon fa fa-bars"></i><a href="forms-basic.html">Lista de características</a></li>
@@ -135,7 +113,7 @@
                             <li><i class="menu-icon fa fa-table"></i><a asp-controller="" asp-action="">Cadastrar tamanho</a></li>
                             <li><i class="menu-icon fa fa-table"></i><a asp-controller="" asp-action="">Cadastrar estoque</a></li>
                         </ul>
-                    </li>
+                    </li>*@
                 </ul>
             </div><!-- /.navbar-collapse -->
         </nav>

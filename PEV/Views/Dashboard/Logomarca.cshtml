@@ -39,20 +39,6 @@
     </div>
 </form>
 
-@*<form method="post" enctype="multipart/form-data" asp-controller="Dashboard" asp-action="UploadFiles">
-        <div class="form-group">
-            <div class="col-md-10">
-                <p>Imagens</p>
-                <input type="file" name="files" multiple />
-            </div>
-        </div>
-        <div class="form-group">
-            <div class="col-md-10">
-                <button type="submit" class="btn btn-success" style="margin-top:25px;">Adicionar Imagem</button>
-            </div>
-        </div>
-    </form>*@
-
 <hr />
 <h5>Selecione uma Imagem para usar como Logomarca</h5>
 <hr />
@@ -65,7 +51,7 @@
                     <div><img src="~/imagens/@item" style="max-height:150px; max-width: 200px" /></div>
                 </div>
                 <div>
-                    <button type="button" class="btn btn-warning btn-sm" onclick="window.location.href='/Dashboard/FotoSelecionada?Nome=@item'" style="margin-top: 25px;"><i class="fa fa-edit"></i></button>
+                    <button type="button" class="btn btn-warning btn-sm" id="btn" onclick="window.location.href='/Dashboard/FotoSelecionada?Nome=@item'" style="margin-top: 25px;"><i class="fa fa-edit"></i></button>
                 </div>
             </div>
         </div>
@@ -106,6 +92,33 @@
 
             })
         }, false)
+    }
+
+    function SetSubmit() {
+        $('#btn').click (function (e) {
+            e.preventDefault();
+            var form = $(this);
+            var url = form.attr('action');
+            $.ajax({
+                type: "POST",
+                url: url,
+                data: form.serialize(),
+                success: function (data) {
+                    if (data.success) {
+                        alertSucesso(data.msg);
+                    } else {
+
+                        if (data.msg.indexOf("Erro") > -1) {
+                            alertErro(data.msg);
+                        }
+                        else {
+                            alertInformacao(data.msg);
+                        }
+                    }
+                }
+            });
+
+        });
     }
 
 </script>

@@ -15,46 +15,10 @@ namespace PEV.Data
 {
     public class RelatorioDB
     {
-        //Número de Colaboradores
-        public Colaborador Colaboradores()
-        {
-
-            try
-            {
-                string sSQL = "";
-                MySqlCommand cmd = new MySqlCommand();
-                MySqlConnection cn = new MySqlConnection(CConexao.Get_StringConexao());
-                cn.Open();
-
-                sSQL = "SELECT IFNULL (COUNT(*), 0) AS Colaboradores FROM tb_login WHERE tipo='A';";
-
-                cmd.CommandText = sSQL;
-                cmd.Connection = cn;
-                var DrColaborador = cmd.ExecuteReader();
-
-                DrColaborador.Read();
-
-                var colaborador = new Colaborador()
-                {
-                    TotalColaborador = Convert.ToInt32(DrColaborador["Colaboradores"])
-                };
-
-                var model = new Colaborador();
-                model.TotalColaborador = Convert.ToInt32(colaborador.TotalColaborador);
-
-                return model;
-            }
-            catch (Exception e)
-            {
-                string msg = e.Message;
-                return null;
-            }
-        }
 
         //Número de Clientes
         public Cliente Clientes()
         {
-
             try
             {
                 string sSQL = "";
@@ -83,14 +47,17 @@ namespace PEV.Data
             catch (Exception e)
             {
                 string msg = e.Message;
-                return null;
+
+                var model = new Cliente();
+                model.TotalCliente = 0;
+
+                return model;
             }
         }
 
         //Número de produtos ativos
         public Produto Produtos()
         {
-
             try
             {
                 string sSQL = "";
@@ -119,7 +86,10 @@ namespace PEV.Data
             catch (Exception e)
             {
                 string msg = e.Message;
-                return null;
+                var model = new Produto();
+                model.TotalProduto = 0;
+
+                return model;
             }
         }
 
@@ -155,15 +125,16 @@ namespace PEV.Data
             catch (Exception e)
             {
                 string msg = e.Message;
-                return null;
+                var model = new Produto();
+                model.QuantidadeTotal = 0;
+
+                return model;
             }
         }
-
 
         //Quantidade de venda nos últimos 7 dias
         public Vendas Vendas()
         {
-
             try
             {
                 string sSQL = "";
@@ -191,15 +162,15 @@ namespace PEV.Data
             }
             catch (Exception e)
             {
-                string msg = e.Message;
-                return null;
+                var model = new Vendas();
+                model.TotalVenda = 0;
+                return model;
             }
         }
 
         //Valor total de vendas dos últimos 7 dias
         public Vendas VendaValor()
         {
-
             try
             {
                 string sSQL = "";
@@ -221,21 +192,18 @@ namespace PEV.Data
                 var model = new Vendas();
                 model.VendaValor = Convert.ToDouble(venda.VendaValor);
                 return model;
-
-
             }
             catch (Exception e)
             {
-                string msg = e.Message;
-                return null;
+                var model = new Vendas();
+                model.VendaValor = 0;
+                return model;
             }
         }
-
 
         // Tiket médio
         public Vendas MediaVendas()
         {
-
             try
             {
                 string sSQL = "";
@@ -262,15 +230,16 @@ namespace PEV.Data
             }
             catch (Exception e)
             {
-                string msg = e.Message;
-                return null;
+                var model = new Vendas();
+                model.MedidaVendas = 0;
+
+                return model;
             }
         }
 
         //Maior Venda
         public Vendas MaiorVendas()
         {
-
             try
             {
                 string sSQL = "";
@@ -298,7 +267,10 @@ namespace PEV.Data
             catch (Exception e)
             {
                 string msg = e.Message;
-                return null;
+                var model = new Vendas();
+                model.MaiorVenda = 0;
+
+                return model;
             }
         }
 
@@ -333,7 +305,10 @@ namespace PEV.Data
             catch (Exception e)
             {
                 string msg = e.Message;
-                return null;
+                var model = new Vendas();
+                model.VendasTotal = 0;
+
+                return model;
             }
         }
 
@@ -341,7 +316,6 @@ namespace PEV.Data
         //Valor total das vendas
         public Vendas VendaValorTotal()
         {
-
             try
             {
                 string sSQL = "";
@@ -370,106 +344,16 @@ namespace PEV.Data
             catch (Exception e)
             {
                 string msg = e.Message;
-                return null;
-            }
-        }
+                var model = new Vendas();
+                model.VendasValorTotal = 0;
 
-
-        //Tamanho que mais vendeu
-        public TamanhoVendeu TamanhoMaisVendeu()
-        {
-
-            try
-            {
-                string sSQL = "";
-                MySqlCommand cmd = new MySqlCommand();
-                MySqlConnection cn = new MySqlConnection(CConexao.Get_StringConexao());
-                cn.Open();
-
-
-                sSQL = "SELECT p.Tamanho, COUNT(i.CodigoProduto) AS Quantidade FROM tb_venda_itens AS i " +
-                    "INNER JOIN tb_produto AS p ON(p.CodigoProduto = i.CodigoProduto) GROUP BY p.Tamanho ORDER BY Quantidade DESC;";
-
-                cmd.CommandText = sSQL;
-                cmd.Connection = cn;
-                var DrVenda = cmd.ExecuteReader();
-
-                DrVenda.Read();
-
-                var TamVen = new TamanhoVendeu()
-                {
-                    Tamanho = DrVenda["Tamanho"].ToString(),
-                    Quantidade = Convert.ToInt16(DrVenda["Quantidade"])
-                };
-
-                var model = new TamanhoVendeu();
-                model.Tamanho = TamVen.Tamanho.ToString();
-                model.Quantidade = Convert.ToInt16(TamVen.Quantidade);
-
-                return model;
-            }
-            catch (Exception e)
-            {
-                string msg = e.Message;
-                var model = new TamanhoVendeu();
-                model.Tamanho = "Sem Registros!";
-                model.Quantidade = 0;
                 return model;
             }
         }
-
-
-        //NOME E TAMANHO DO PRODUTO QUE MAIS VENDA
-        public TamanhoVendeu NomeTamMaisVendido()
-        {
-
-            try
-            {
-                string sSQL = "";
-                MySqlCommand cmd = new MySqlCommand();
-                MySqlConnection cn = new MySqlConnection(CConexao.Get_StringConexao());
-                cn.Open();
-
-                sSQL = "SELECT p.Nome, p.Tamanho, COUNT(i.CodigoProduto) AS Quantidade FROM tb_venda_itens AS i " +
-                        "INNER JOIN tb_produto AS p ON(p.CodigoProduto = i.CodigoProduto) " +
-                        "GROUP BY i.codigoproduto ORDER BY Quantidade DESC; ";
-
-                cmd.CommandText = sSQL;
-                cmd.Connection = cn;
-                var DrVenda = cmd.ExecuteReader();
-
-                DrVenda.Read();
-
-                var venda = new TamanhoVendeu()
-                {
-                    Nome = DrVenda["Nome"].ToString(),
-                    Tamanho = DrVenda["Tamanho"].ToString(),
-                    Quantidade = Convert.ToInt16(DrVenda["Quantidade"])
-                };
-
-                var model = new TamanhoVendeu();
-                model.Nome = venda.Nome.ToString();
-                model.Tamanho = venda.Tamanho.ToString();
-                model.Quantidade = Convert.ToInt16(venda.Quantidade);
-
-                return model;
-            }
-            catch (Exception e)
-            {
-                string msg = e.Message;
-                var model = new TamanhoVendeu();
-                model.Nome = "Sem Registros!";
-                model.Tamanho = "";
-                model.Quantidade = 0;
-                return model;
-            }
-        }
-
 
         //NOME DO PRODUTO QUE MAIS VENDIDO
         public TamanhoVendeu NomeProdutoMaisVendido()
         {
-
             try
             {
                 string sSQL = "";
@@ -510,56 +394,9 @@ namespace PEV.Data
         }
 
 
-        //Método GENERO MAIS VENDIDO
-        public GeneroVendeMais GeneroMaisVendido()
-        {
-
-            try
-            {
-                string sSQL = "";
-                MySqlCommand cmd = new MySqlCommand();
-                MySqlConnection cn = new MySqlConnection(CConexao.Get_StringConexao());
-                cn.Open();
-
-                sSQL = "        SELECT pg.CodigoGenero, g.Descricao, COUNT(i.CodigoProduto) AS Quantidade FROM tb_venda_itens AS i " +
-                                "INNER JOIN tb_produto_genero AS pg ON(pg.CodigoProduto = i.CodigoProduto) " +
-                                "INNER JOIN tb_produto AS p ON(p.CodigoProduto = i.CodigoProduto) " +
-                                "INNER JOIN tb_genero AS g ON(g.CodigoGenero = pg.CodigoGenero) " +
-                                "GROUP BY pg.CodigoGenero ORDER BY Quantidade DESC; ";
-
-                cmd.CommandText = sSQL;
-                cmd.Connection = cn;
-                var DrVenda = cmd.ExecuteReader();
-
-                DrVenda.Read();
-
-                var venda = new GeneroVendeMais()
-                {
-                    Descricao = DrVenda["Descricao"].ToString(),
-                    Quantidade = Convert.ToInt16(DrVenda["Quantidade"])
-                };
-
-                var model = new GeneroVendeMais();
-                model.Descricao = venda.Descricao.ToString();
-                model.Quantidade = Convert.ToInt16(venda.Quantidade);
-
-                return model;
-            }
-            catch (Exception e)
-            {
-                string msg = e.Message;
-                var model = new GeneroVendeMais();
-                model.Descricao = "Sem Registros!";
-                model.Quantidade = 0;
-                return model;
-            }
-        }
-
-
         //PRODUTOS QUE AINDA NÃO VENDERAM NADA
         public List<ClienteCidade> ProdutoSemVenda()
         {
-
             try
             {
                 string sSQL = "";
@@ -592,13 +429,18 @@ namespace PEV.Data
             catch (Exception e)
             {
                 string msg = e.Message;
-                return null;
-            }
+                var Lista = new List<ClienteCidade>();
+                var item = new ClienteCidade
+                    {
+                        Nome = "Indisponível",
+                    };
+                    Lista.Add(item);
+            return Lista;
+                }
         }
 
         public List<ClienteCidade> ClienteCidade()
         {
-
             try
             {
                 string sSQL = "";
@@ -630,11 +472,15 @@ namespace PEV.Data
             catch (Exception e)
             {
                 string msg = e.Message;
-                return null;
+                var Lista = new List<ClienteCidade>();
+                var item = new ClienteCidade
+                {
+                    Nome = "Indisponível",
+                };
+                Lista.Add(item);
+                return Lista;
             }
         }
     }
-
-
 }
 
